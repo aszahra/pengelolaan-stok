@@ -1,11 +1,17 @@
 <?php
 
+use App\Http\Controllers\BarangController;
+use App\Http\Controllers\KategoriBarang;
+use App\Http\Controllers\KategoriBarangController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::resource('kategoribarang', KategoriBarangController::class)->middleware('auth');
+Route::resource('barang', BarangController::class)->middleware('auth');
 
 Route::get('/dashboard', function () {
     return view('dashboard');

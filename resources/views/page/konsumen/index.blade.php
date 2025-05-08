@@ -14,21 +14,22 @@
                 <div class="p-6 text-gray-900 dark:text-gray-100 flex gap-5">
                     <div class="w-full bg-gray-100 p-4 rounded-xl">
                         <div class="mb-5">
-                            Input Data Supplier
+                            Input Data Konsumen
                         </div>
                         <form action="{{ route('konsumen.store') }}" method="post">
                             @csrf
                             <div class="mb-5">
                                 <label for="base-input"
                                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nama
-                                    Supplier</label>
-                                <input name="nama_supplier" type="text" id="base-input"
+                                    Konsumen</label>
+                                <input name="nama_konsumen" type="text" id="base-input"
                                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                    placeholder="Masukan nama supplier...">
+                                    placeholder="Masukan nama konsumen...">
                             </div>
                             <div class="mb-5">
                                 <label for="base-input"
-                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">No. Telepon</label>
+                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">No.
+                                    Telepon</label>
                                 <input name="no_telp" type="number" id="base-input"
                                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                     placeholder="Masukan nomor telepon...">
@@ -61,7 +62,13 @@
                                             NO
                                         </th>
                                         <th scope="col" class="px-6 py-3">
-                                            Nama Supplier
+                                            Nama Konsumen
+                                        </th>
+                                        <th scope="col" class="px-6 py-3">
+                                            No. Telepon
+                                        </th>
+                                        <th scope="col" class="px-6 py-3">
+                                            Email
                                         </th>
                                         <th scope="col" class="px-6 py-3">
                                             Alamat
@@ -75,15 +82,21 @@
                                     @php
                                         $no = 1;
                                     @endphp
-                                    @foreach ($supplier as $key => $k)
+                                    @foreach ($konsumen as $key => $k)
                                         <tr
                                             class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                                             <th scope="row"
                                                 class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                                {{ $supplier->perPage() * ($supplier->currentPage() - 1) + $key + 1 }}
+                                                {{ $konsumen->perPage() * ($konsumen->currentPage() - 1) + $key + 1 }}
                                             </th>
                                             <td class="px-6 py-4">
-                                                {{ $k->nama_supplier }}
+                                                {{ $k->nama_konsumen }}
+                                            </td>
+                                            <td class="px-6 py-4">
+                                                {{ $k->no_telp }}
+                                            </td>
+                                            <td class="px-6 py-4">
+                                                {{ $k->email }}
                                             </td>
                                             <td class="px-6 py-4">
                                                 {{ $k->alamat }}
@@ -91,7 +104,9 @@
                                             <td class="px-6 py-4">
                                                 <button type="button" data-id="{{ $k->id }}"
                                                     data-modal-target="sourceModal"
-                                                    data-nama_supplier="{{ $k->nama_supplier }}"
+                                                    data-nama_konsumen="{{ $k->nama_konsumen }}"
+                                                    data-no_telp="{{ $k->no_telp }}"
+                                                    data-email="{{ $k->email }}"
                                                     data-alamat="{{ $k->alamat }}" onclick="editSourceModal(this)"
                                                     class="bg-amber-500 hover:bg-amber-600 px-3 py-1 rounded-md text-xs text-white">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="16"
@@ -102,7 +117,7 @@
                                                     </svg>
                                                 </button>
                                                 <button
-                                                    onclick="return supplierDelete('{{ $k->id }}','{{ $k->nama_supplier }}','{{ $k->alamat }}')"
+                                                    onclick="return supplierDelete('{{ $k->id }}','{{ $k->nama_konsumen }}','{{ $k->no_telp }}','{{ $k->email }}','{{ $k->alamat }}')"
                                                     class="bg-red-500 hover:bg-bg-red-300 px-3 py-1 rounded-md text-xs text-white">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="16"
                                                         height="16" fill="currentColor" class="bi bi-trash3-fill"
@@ -118,14 +133,14 @@
                             </table>
                         </div>
                         <div class="mt-4">
-                            {{ $supplier->links() }}
+                            {{ $konsumen->links() }}
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    {{-- <div class="fixed inset-0 flex items-center justify-center z-50 hidden" id="sourceModal">
+    <div class="fixed inset-0 flex items-center justify-center z-50 hidden" id="sourceModal">
         <div class="fixed inset-0 bg-black opacity-50"></div>
         <div class="fixed inset-0 flex items-center justify-center">
             <div class="w-full md:w-1/2 relative bg-white rounded-lg shadow mx-5">
@@ -143,11 +158,25 @@
                     @csrf
                     <div class="flex flex-col  p-4 space-y-6">
                         <div class="">
-                            <label for="text" class="block mb-2 text-sm font-medium text-gray-900">Nama Supplier
+                            <label for="text" class="block mb-2 text-sm font-medium text-gray-900">Nama Konsumen
                             </label>
-                            <input type="text" id="nama_supplier" name="nama_supplier"
+                            <input type="text" id="nama_konsumen" name="nama_konsumen"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                placeholder="Masukan nama supplier disini...">
+                                placeholder="Masukan nama konsumen disini...">
+                        </div>
+                        <div class="">
+                            <label for="text" class="block mb-2 text-sm font-medium text-gray-900">No. Telepon
+                            </label>
+                            <input type="text" id="no_telp" name="no_telp"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                placeholder="Masukan nomor telepon disini...">
+                        </div>
+                        <div class="">
+                            <label for="text" class="block mb-2 text-sm font-medium text-gray-900">Email
+                            </label>
+                            <input type="text" id="email" name="email"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                placeholder="Masukan email disini...">
                         </div>
                         <div class="">
                             <label for="text" class="block mb-2 text-sm font-medium text-gray-900">Alamat
@@ -166,7 +195,7 @@
                 </form>
             </div>
         </div>
-    </div> --}}
+    </div>
 </x-app-layout>
 
 {{-- <script>

@@ -3,6 +3,7 @@
 use App\Http\Controllers\BarangController;
 use App\Http\Controllers\KategoriBarang;
 use App\Http\Controllers\KategoriBarangController;
+use App\Http\Controllers\KonsumenController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SupplierController;
 use Illuminate\Support\Facades\Route;
@@ -13,6 +14,7 @@ Route::get('/', function () {
 
 Route::resource('barang', BarangController::class)->middleware('auth');
 Route::resource('supplier', SupplierController::class)->middleware('auth');
+Route::resource('konsumen', KonsumenController::class)->middleware('auth');
 
 Route::get('/dashboard', function () {
     return view('dashboard');

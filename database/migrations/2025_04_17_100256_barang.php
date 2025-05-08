@@ -14,9 +14,10 @@ return new class extends Migration
         Schema::create('barang', function (Blueprint $table) {
             $table->id();
             // $table->string('kd_barang')->primary();
-            $table->string('kd_kategori');
+            // $table->string('kd_kategori');
             $table->string('nama_barang');
-            // $table->integer('harga');
+            $table->string('jenis');
+            $table->string('satuan');
             $table->integer('stok');
             $table->timestamps();
         });

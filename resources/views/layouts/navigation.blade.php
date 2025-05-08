@@ -37,16 +37,16 @@
                             </x-slot>
 
                             <x-slot name="content">
-                                <x-dropdown-link :href="route('kategoribarang.index')">
-                                    {{ __('Kategori Barang') }}
-                                </x-dropdown-link>
-
                                 <x-dropdown-link :href="route('barang.index')">
                                     {{ __('Barang') }}
                                 </x-dropdown-link>
 
                                 <x-dropdown-link :href="route('supplier.index')">
                                     {{ __('Supplier') }}
+                                </x-dropdown-link>
+
+                                <x-dropdown-link :href="route('dashboard')">
+                                    {{ __('Konsumen') }}
                                 </x-dropdown-link>
                             </x-slot>
                         </x-dropdown>

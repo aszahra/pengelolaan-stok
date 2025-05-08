@@ -72,10 +72,8 @@ class SupplierController extends Controller
         $datas = Supplier::findOrFail($id);
         $datas->update($data);
 
-        // return back()->with('message_delete', 'Data Jabatan Sudah di update');
-
         return redirect()
-            ->route('barang.index')
+            ->route('supplier.index')
             ->with('message_update', 'Data Barang Sudah di update');
     }
 

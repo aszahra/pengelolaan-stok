@@ -18,14 +18,14 @@
                         </div>
                         <form action="{{ route('kategoribarang.store') }}" method="post">
                             @csrf
-                            <div class="mb-5 w-full">
+                            {{-- <div class="mb-5 w-full">
                                 <label for="kd_kategori"
                                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Kode
                                     Kategori</label>
                                 <input type="text" id="base-input" name="kd_kategori" value="{{ $kd_kategori }}"
                                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                     placeholder="Kode Kategori" readonly required />
-                            </div>
+                            </div> --}}
                             <div class="mb-5">
                                 <label for="base-input"
                                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nama
@@ -48,9 +48,9 @@
                                         <th scope="col" class="px-6 py-3">
                                             NO
                                         </th>
-                                        <th scope="col" class="px-6 py-3">
+                                        {{-- <th scope="col" class="px-6 py-3">
                                             Kode Kategori
-                                        </th>
+                                        </th> --}}
                                         <th scope="col" class="px-6 py-3">
                                             Nama Kategori
                                         </th>
@@ -70,14 +70,14 @@
                                                 class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                                 {{ $kategoribarang->perPage() * ($kategoribarang->currentPage() - 1) + $key + 1 }}
                                             </th>
-                                            <td class="px-6 py-4">
+                                            {{-- <td class="px-6 py-4">
                                                 {{ $k->kd_kategori }}
-                                            </td>
+                                            </td> --}}
                                             <td class="px-6 py-4">
                                                 {{ $k->nama_kategori }}
                                             </td>
                                             <td class="px-6 py-4">
-                                                <button type="button" data-id="{{ $k->kd_kategori }}"
+                                                <button type="button" data-id="{{ $k->id }}"
                                                     data-modal-target="sourceModal"
                                                     data-nama_kategori="{{ $k->nama_kategori }}"
                                                     onclick="editSourceModal(this)"
@@ -90,7 +90,7 @@
                                                     </svg>
                                                 </button>
                                                 <button
-                                                    onclick="return kategoribarangDelete('{{ $k->kd_kategori }}','{{ $k->nama_kategori }}')"
+                                                    onclick="return kategoribarangDelete('{{ $k->id }}','{{ $k->nama_kategori }}')"
                                                     class="bg-red-500 hover:bg-bg-red-300 px-3 py-1 rounded-md text-xs text-white">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="16"
                                                         height="16" fill="currentColor" class="bi bi-trash3-fill"
@@ -130,12 +130,12 @@
                 <form method="POST" id="formSourceModal">
                     @csrf
                     <div class="flex flex-col  p-4 space-y-6">
-                        <div class="">
+                        {{-- <div class="">
                             <label for="text" class="block mb-2 text-sm font-medium text-gray-900">Kode
                                 Kategori</label>
                             <input type="text" id="kd_kategori" name="kd_kategori"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                        </div>
+                        </div> --}}
                         <div class="">
                             <label for="text" class="block mb-2 text-sm font-medium text-gray-900">Nama
                                 Kategori</label>
@@ -159,14 +159,14 @@
     const editSourceModal = (button) => {
         const formModal = document.getElementById('formSourceModal');
         const modalTarget = button.dataset.modalTarget;
-        const kd_kategori = button.dataset.id;
+        const id = button.dataset.id;
         const nama_kategori = button.dataset.nama_kategori;
-        let url = "{{ route('kategoribarang.update', ':kd_kategori') }}".replace(':kd_kategori', kd_kategori);
+        let url = "{{ route('kategoribarang.update', ':id') }}".replace(':id', id);
 
         let status = document.getElementById(modalTarget);
         document.getElementById('title_source').innerText = `Update Kategori Barang ${nama_kategori}`;
 
-        document.getElementById('kd_kategori').value = kd_kategori;
+        // document.getElementById('kd_kategori').value = kd_kategori;
         document.getElementById('nama_kategori').value = nama_kategori;
 
         document.getElementById('formSourceButton').innerText = 'Simpan';
@@ -191,11 +191,11 @@
         status.classList.toggle('hidden');
     }
 
-    const kategoribarangDelete = async (kd_kategori, nama_kategori) => {
+    const kategoribarangDelete = async (id, nama_kategori) => {
         let tanya = confirm(`Apakah anda yakin untuk menghapus kategori barang ${nama_kategori} ?`);
         if (tanya) {
             try {
-                const response = await axios.post(`/kategoribarang/${kd_kategori}`, {
+                const response = await axios.post(`/kategoribarang/${id}`, {
                     '_method': 'DELETE',
                     '_token': document.querySelector('meta[name="csrf-token"]').getAttribute(
                         'content')

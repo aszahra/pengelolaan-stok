@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Menu Barang') }}
+            {{ __('Menu Supplier') }}
         </h2>
     </x-slot>
 
@@ -14,36 +14,24 @@
                 <div class="p-6 text-gray-900 dark:text-gray-100 flex gap-5">
                     <div class="w-full bg-gray-100 p-4 rounded-xl">
                         <div class="mb-5">
-                            Input Data Barang
+                            Input Data Supplier
                         </div>
-                        <form action="{{ route('barang.store') }}" method="post">
+                        <form action="{{ route('supplier.store') }}" method="post">
                             @csrf
-                            <div class="mb-5 w-full">
-                                <label for="base-input"
-                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Kategori
-                                    Barang</label>
-                                <select class="js-example-placeholder-single js-states form-control w-full"
-                                    name="kd_kategori" placeholder="Pilih Kategori Barang">
-                                    <option value="" disabled selected>Pilih...</option>
-                                    @foreach ($kd_kategori as $k)
-                                        <option value="{{ $k->id }}">{{ $k->nama_kategori }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
                             <div class="mb-5">
                                 <label for="base-input"
                                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nama
-                                    Barang</label>
-                                <input name="nama_barang" type="text" id="base-input"
+                                    Supplier</label>
+                                <input name="nama_supplier" type="text" id="base-input"
                                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                    placeholder="Masukan nama barang...">
+                                    placeholder="Masukan nama supplier...">
                             </div>
                             <div class="mb-5">
                                 <label for="base-input"
-                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Stok</label>
-                                <input name="stok" type="number" id="base-input"
+                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Alamat</label>
+                                <input name="alamat" type="text" id="base-input"
                                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                    placeholder="Masukan jumlah stok...">
+                                    placeholder="Masukan alamat...">
                             </div>
                             <button type="submit"
                                 class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">SIMPAN</button>
@@ -59,13 +47,10 @@
                                             NO
                                         </th>
                                         <th scope="col" class="px-6 py-3">
-                                            Kategori Barang
+                                            Nama Supplier
                                         </th>
                                         <th scope="col" class="px-6 py-3">
-                                            Nama Barang
-                                        </th>
-                                        <th scope="col" class="px-6 py-3">
-                                            Stok
+                                            Alamat
                                         </th>
                                         <th scope="col" class="px-6 py-3">
 
@@ -76,28 +61,24 @@
                                     @php
                                         $no = 1;
                                     @endphp
-                                    @foreach ($barang as $key => $k)
+                                    @foreach ($supplier as $key => $k)
                                         <tr
                                             class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                                             <th scope="row"
                                                 class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                                {{ $barang->perPage() * ($barang->currentPage() - 1) + $key + 1 }}
+                                                {{ $supplier->perPage() * ($supplier->currentPage() - 1) + $key + 1 }}
                                             </th>
                                             <td class="px-6 py-4">
-                                                {{ $k->kategori->nama_kategori }}
+                                                {{ $k->nama_supplier }}
                                             </td>
                                             <td class="px-6 py-4">
-                                                {{ $k->nama_barang }}
-                                            </td>
-                                            <td class="px-6 py-4">
-                                                {{ $k->stok }}
+                                                {{ $k->alamat }}
                                             </td>
                                             <td class="px-6 py-4">
                                                 <button type="button" data-id="{{ $k->id }}"
                                                     data-modal-target="sourceModal"
-                                                    data-kd_kategori="{{ $k->kd_kategori }}"
-                                                    data-nama_barang="{{ $k->nama_barang }}"
-                                                    data-stok="{{ $k->stok }}" onclick="editSourceModal(this)"
+                                                    data-nama_supplier="{{ $k->nama_supplier }}"
+                                                    data-alamat="{{ $k->alamat }}" onclick="editSourceModal(this)"
                                                     class="bg-amber-500 hover:bg-amber-600 px-3 py-1 rounded-md text-xs text-white">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="16"
                                                         height="16" fill="currentColor" class="bi bi-pencil-fill"
@@ -107,7 +88,7 @@
                                                     </svg>
                                                 </button>
                                                 <button
-                                                    onclick="return barangDelete('{{ $k->id }}','{{ $k->kd_kategori }}','{{ $k->nama_barang }}','{{ $k->stok }}')"
+                                                    onclick="return supplierDelete('{{ $k->id }}','{{ $k->nama_supplier }}','{{ $k->alamat }}')"
                                                     class="bg-red-500 hover:bg-bg-red-300 px-3 py-1 rounded-md text-xs text-white">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="16"
                                                         height="16" fill="currentColor" class="bi bi-trash3-fill"
@@ -123,7 +104,7 @@
                             </table>
                         </div>
                         <div class="mt-4">
-                            {{ $barang->links() }}
+                            {{ $supplier->links() }}
                         </div>
                     </div>
                 </div>
@@ -148,30 +129,18 @@
                     @csrf
                     <div class="flex flex-col  p-4 space-y-6">
                         <div class="">
-                            <label for="kd_kategori"
-                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Kategori
-                                Barang</label>
-                            <select class="js-example-placeholder-single js-states form-control w-full"
-                                name="kd_kategori" id="kd_kategori" data-placeholder="Pilih Kategori Barang">
-                                {{-- <option value="" disabled selected>Pilih...</option> --}}
-                                @foreach ($kd_kategori as $k)
-                                    <option value="{{ $k->id }}">{{ $k->nama_kategori }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                        <div class="">
-                            <label for="text" class="block mb-2 text-sm font-medium text-gray-900">Nama
-                                Barang</label>
-                            <input type="text" id="nama_barang" name="nama_barang"
-                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                placeholder="Masukan nama barang disini...">
-                        </div>
-                        <div class="">
-                            <label for="text" class="block mb-2 text-sm font-medium text-gray-900">Stok
+                            <label for="text" class="block mb-2 text-sm font-medium text-gray-900">Nama Supplier
                             </label>
-                            <input type="number" id="stok" name="stok"
+                            <input type="text" id="nama_supplier" name="nama_supplier"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                placeholder="Masukan jumlah stok disini...">
+                                placeholder="Masukan nama supplier disini...">
+                        </div>
+                        <div class="">
+                            <label for="text" class="block mb-2 text-sm font-medium text-gray-900">Alamat
+                            </label>
+                            <input type="text" id="alamat" name="alamat"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                placeholder="Masukan alamat disini...">
                         </div>
                     </div>
                     <div class="flex items-center p-4 space-x-2 border-t border-gray-200 rounded-b">
@@ -191,17 +160,15 @@
         const formModal = document.getElementById('formSourceModal');
         const modalTarget = button.dataset.modalTarget;
         const id = button.dataset.id;
-        const kd_kategori = button.dataset.kd_kategori;
-        const nama_barang = button.dataset.nama_barang;
-        const stok = button.dataset.stok;
-        let url = "{{ route('barang.update', ':id') }}".replace(':id', id);
+        const nama_supplier = button.dataset.nama_supplier;
+        const alamat = button.dataset.alamat;
+        let url = "{{ route('supplier.update', ':id') }}".replace(':id', id);
 
         let status = document.getElementById(modalTarget);
-        document.getElementById('title_source').innerText = `Update Barang ${nama_barang}`;
+        document.getElementById('title_source').innerText = `Update supplier ${nama_supplier}`;
 
-        document.getElementById('kd_kategori').value = kd_kategori;
-        document.getElementById('nama_barang').value = nama_barang;
-        document.getElementById('stok').value = stok;
+        document.getElementById('nama_supplier').value = nama_supplier;
+        document.getElementById('alamat').value = alamat;
 
         document.getElementById('formSourceButton').innerText = 'Simpan';
         document.getElementById('formSourceModal').setAttribute('action', url);
@@ -225,11 +192,11 @@
         status.classList.toggle('hidden');
     }
 
-    const barangDelete = async (id, nama_barang) => {
-        let tanya = confirm(`Apakah anda yakin untuk menghapus barang ini?`);
+    const supplierDelete = async (id, nama_supplier) => {
+        let tanya = confirm(`Apakah anda yakin untuk menghapus supplier ini?`);
         if (tanya) {
             try {
-                const response = await axios.post(`/barang/${id}`, {
+                const response = await axios.post(`/supplier/${id}`, {
                     '_method': 'DELETE',
                     '_token': document.querySelector('meta[name="csrf-token"]').getAttribute(
                         'content')

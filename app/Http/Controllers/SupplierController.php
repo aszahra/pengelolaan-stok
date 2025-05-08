@@ -2,29 +2,29 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Barang;
-use App\Models\KategoriBarang;
+use App\Models\Supplier;
 use Illuminate\Http\Request;
 
-class BarangController extends Controller
+class SupplierController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $barang = Barang::paginate(5);
-        $kd_kategori = KategoriBarang::all();
-        return view('page.barang.index')->with([
-            'barang' => $barang,
-            'kd_kategori' => $kd_kategori,
+        $supplier = Supplier::paginate(5);
+        return view('page.supplier.index')->with([
+            'supplier' => $supplier,
         ]);
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create() {}
+    public function create()
+    {
+        //
+    }
 
     /**
      * Store a newly created resource in storage.
@@ -32,15 +32,14 @@ class BarangController extends Controller
     public function store(Request $request)
     {
         $data = [
-            'kd_kategori' => $request->input('kd_kategori'),
-            'nama_barang' => $request->input('nama_barang'),
-            'stok' => $request->input('stok'),
+            'nama_supplier' => $request->input('nama_supplier'),
+            'alamat' => $request->input('alamat'),
         ];
 
-        Barang::create($data);
+        Supplier::create($data);
 
         return redirect()
-            ->route('barang.index')
+            ->route('supplier.index')
             ->with('message_insert', 'Data Departemen Sudah ditambahkan');
     }
 
@@ -66,12 +65,11 @@ class BarangController extends Controller
     public function update(Request $request, string $id)
     {
         $data = [
-            'kd_kategori' => $request->input('kd_kategori'),
-            'nama_barang' => $request->input('nama_barang'),
-            'stok' => $request->input('stok'),
+            'nama_supplier' => $request->input('nama_supplier'),
+            'alamat' => $request->input('alamat'),
         ];
 
-        $datas = Barang::findOrFail($id);
+        $datas = Supplier::findOrFail($id);
         $datas->update($data);
 
         // return back()->with('message_delete', 'Data Jabatan Sudah di update');
@@ -86,7 +84,7 @@ class BarangController extends Controller
      */
     public function destroy(string $id)
     {
-        $data = Barang::findOrFail($id);
+        $data = Supplier::findOrFail($id);
         $data->delete();
         return back()->with('message_delete', 'Data Barang Sudah dihapus');
     }

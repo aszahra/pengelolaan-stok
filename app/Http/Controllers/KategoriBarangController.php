@@ -13,10 +13,10 @@ class KategoriBarangController extends Controller
     public function index()
     {
         $kategoribarang = KategoriBarang::paginate(5);
-        $kd_kategori = KategoriBarang::createCode();
-        return view('page.kategoribarang.index', compact('kd_kategori'))->with([
+        // $kd_kategori = KategoriBarang::createCode();
+        return view('page.kategoribarang.index')->with([
             'kategoribarang' => $kategoribarang,
-            'kd_kategori' => $kd_kategori,
+            // 'kd_kategori' => $kd_kategori,
         ]);
     }
 
@@ -34,7 +34,7 @@ class KategoriBarangController extends Controller
     public function store(Request $request)
     {
         $data = [
-            'kd_kategori' => $request->input('kd_kategori'),
+            // 'kd_kategori' => $request->input('kd_kategori'),
             'nama_kategori' => $request->input('nama_kategori'),
         ];
 
@@ -64,14 +64,14 @@ class KategoriBarangController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $kd_kategori)
+    public function update(Request $request, string $id)
     {
         $data = [
-            'kd_kategori' => $request->input('kd_kategori'),
+            // 'kd_kategori' => $request->input('kd_kategori'),
             'nama_kategori' => $request->input('nama_kategori')
         ];
 
-        $datas = KategoriBarang::findOrFail($kd_kategori);
+        $datas = KategoriBarang::findOrFail($id);
         $datas->update($data);
 
         return redirect()
@@ -82,9 +82,9 @@ class KategoriBarangController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $kd_kategori)
+    public function destroy(string $id)
     {
-        $data = KategoriBarang::findOrFail($kd_kategori);
+        $data = KategoriBarang::findOrFail($id);
         $data->delete();
         return back()->with('message_delete', 'Data Kategori Barang Sudah dihapus');
     }

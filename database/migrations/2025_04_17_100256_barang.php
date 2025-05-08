@@ -16,8 +16,7 @@ return new class extends Migration
             // $table->string('kd_barang')->primary();
             $table->string('kd_kategori');
             $table->string('nama_barang');
-            $table->integer('harga');
-            $table->integer('stok');
+            // $table->integer('harga');
             $table->integer('stok');
             $table->timestamps();
         });

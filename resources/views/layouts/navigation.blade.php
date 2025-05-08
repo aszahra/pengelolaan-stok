@@ -45,7 +45,7 @@
                                     {{ __('Barang') }}
                                 </x-dropdown-link>
 
-                                <x-dropdown-link :href="route('dashboard')">
+                                <x-dropdown-link :href="route('supplier.index')">
                                     {{ __('Supplier') }}
                                 </x-dropdown-link>
                             </x-slot>

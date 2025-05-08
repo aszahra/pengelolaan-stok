@@ -66,7 +66,19 @@ class KonsumenController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $data = [
+            'nama_konsumen' => $request->input('nama_konsumen'),
+            'no_telp' => $request->input('no_telp'),
+            'email' => $request->input('email'),
+            'alamat' => $request->input('alamat'),
+        ];
+
+        $datas = Konsumen::findOrFail($id);
+        $datas->update($data);
+
+        return redirect()
+            ->route('konsumen.index')
+            ->with('message_update', 'Data Barang Sudah di update');
     }
 
     /**
@@ -74,6 +86,8 @@ class KonsumenController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $data = Konsumen::findOrFail($id);
+        $data->delete();
+        return back()->with('message_delete', 'Data Barang Sudah dihapus');
     }
 }

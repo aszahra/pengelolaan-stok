@@ -33,6 +33,8 @@ class SupplierController extends Controller
     {
         $data = [
             'nama_supplier' => $request->input('nama_supplier'),
+            'no_telp' => $request->input('no_telp'),
+            'email' => $request->input('email'),
             'alamat' => $request->input('alamat'),
         ];
 
@@ -66,6 +68,8 @@ class SupplierController extends Controller
     {
         $data = [
             'nama_supplier' => $request->input('nama_supplier'),
+            'no_telp' => $request->input('no_telp'),
+            'email' => $request->input('email'),
             'alamat' => $request->input('alamat'),
         ];
 

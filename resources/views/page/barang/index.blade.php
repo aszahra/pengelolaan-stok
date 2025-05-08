@@ -18,18 +18,6 @@
                         </div>
                         <form action="{{ route('barang.store') }}" method="post">
                             @csrf
-                            <div class="mb-5 w-full">
-                                <label for="base-input"
-                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Kategori
-                                    Barang</label>
-                                <select class="js-example-placeholder-single js-states form-control w-full"
-                                    name="kd_kategori" placeholder="Pilih Kategori Barang">
-                                    <option value="" disabled selected>Pilih...</option>
-                                    @foreach ($kd_kategori as $k)
-                                        <option value="{{ $k->id }}">{{ $k->nama_kategori }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
                             <div class="mb-5">
                                 <label for="base-input"
                                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nama
@@ -40,11 +28,44 @@
                             </div>
                             <div class="mb-5">
                                 <label for="base-input"
+                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Jenis</label>
+                                <select class="js-example-placeholder-single js-states form-control w-full"
+                                    name="jenis" data-placeholder="Pilih Jenis">
+                                    <option value="">Pilih...</option>
+                                    <option value="Sembako">Sembako</option>
+                                    <option value="Makanan">Makanan</option>
+                                    <option value="Minuman">Minuman</option>
+                                    <option value="Snack">Snack</option>
+                                    <option value="Produk Kebersihan">Produk Kebersihan</option>
+                                    <option value="Lain-Lain">Lain-Lain</option>
+                                </select>
+                            </div>
+                            <div class="mb-5">
+                                <label for="base-input"
+                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Satuan</label>
+                                <select class="js-example-placeholder-single js-states form-control w-full"
+                                    name="satuan" data-placeholder="Pilih Satuan">
+                                    <option value="">Pilih...</option>
+                                    <option value="Kg">Kg</option>
+                                    <option value="Ons">Ons</option>
+                                    <option value="Gram">Gram</option>
+                                    <option value="Liter">Liter</option>
+                                    <option value="Mililiter">Mililiter</option>
+                                    <option value="Pcs">Pcs</option>
+                                    <option value="Pack">Pack</option>
+                                    <option value="Dus">Dus</option>
+                                    <option value="Botol">Botol</option>
+                                    <option value="Kaleng">Kaleng</option>
+                                    <option value="Sachet">Sachet</option>
+                                </select>
+                            </div>
+                            {{-- <div class="mb-5">
+                                <label for="base-input"
                                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Stok</label>
                                 <input name="stok" type="number" id="base-input"
                                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                     placeholder="Masukan jumlah stok...">
-                            </div>
+                            </div> --}}
                             <button type="submit"
                                 class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">SIMPAN</button>
                         </form>
@@ -59,13 +80,13 @@
                                             NO
                                         </th>
                                         <th scope="col" class="px-6 py-3">
-                                            Kategori Barang
-                                        </th>
-                                        <th scope="col" class="px-6 py-3">
                                             Nama Barang
                                         </th>
                                         <th scope="col" class="px-6 py-3">
-                                            Stok
+                                            Jenis
+                                        </th>
+                                        <th scope="col" class="px-6 py-3">
+                                            Satuan
                                         </th>
                                         <th scope="col" class="px-6 py-3">
 
@@ -84,20 +105,20 @@
                                                 {{ $barang->perPage() * ($barang->currentPage() - 1) + $key + 1 }}
                                             </th>
                                             <td class="px-6 py-4">
-                                                {{ $k->kategori->nama_kategori }}
-                                            </td>
-                                            <td class="px-6 py-4">
                                                 {{ $k->nama_barang }}
                                             </td>
                                             <td class="px-6 py-4">
-                                                {{ $k->stok }}
+                                                {{ $k->jenis }}
+                                            </td>
+                                            <td class="px-6 py-4">
+                                                {{ $k->satuan }}
                                             </td>
                                             <td class="px-6 py-4">
                                                 <button type="button" data-id="{{ $k->id }}"
                                                     data-modal-target="sourceModal"
-                                                    data-kd_kategori="{{ $k->kd_kategori }}"
                                                     data-nama_barang="{{ $k->nama_barang }}"
-                                                    data-stok="{{ $k->stok }}" onclick="editSourceModal(this)"
+                                                    data-jenis="{{ $k->jenis }}" data-satuan="{{ $k->satuan }}"
+                                                    onclick="editSourceModal(this)"
                                                     class="bg-amber-500 hover:bg-amber-600 px-3 py-1 rounded-md text-xs text-white">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="16"
                                                         height="16" fill="currentColor" class="bi bi-pencil-fill"
@@ -107,7 +128,7 @@
                                                     </svg>
                                                 </button>
                                                 <button
-                                                    onclick="return barangDelete('{{ $k->id }}','{{ $k->kd_kategori }}','{{ $k->nama_barang }}','{{ $k->stok }}')"
+                                                    onclick="return barangDelete('{{ $k->id }}','{{ $k->nama_barang }}','{{ $k->jenis }}','{{ $k->satuan }}')"
                                                     class="bg-red-500 hover:bg-bg-red-300 px-3 py-1 rounded-md text-xs text-white">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="16"
                                                         height="16" fill="currentColor" class="bi bi-trash3-fill"
@@ -148,18 +169,6 @@
                     @csrf
                     <div class="flex flex-col  p-4 space-y-6">
                         <div class="">
-                            <label for="kd_kategori"
-                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Kategori
-                                Barang</label>
-                            <select class="js-example-placeholder-single js-states form-control w-full"
-                                name="kd_kategori" id="kd_kategori" data-placeholder="Pilih Kategori Barang">
-                                {{-- <option value="" disabled selected>Pilih...</option> --}}
-                                @foreach ($kd_kategori as $k)
-                                    <option value="{{ $k->id }}">{{ $k->nama_kategori }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                        <div class="">
                             <label for="text" class="block mb-2 text-sm font-medium text-gray-900">Nama
                                 Barang</label>
                             <input type="text" id="nama_barang" name="nama_barang"
@@ -167,11 +176,39 @@
                                 placeholder="Masukan nama barang disini...">
                         </div>
                         <div class="">
-                            <label for="text" class="block mb-2 text-sm font-medium text-gray-900">Stok
+                            <label for=""
+                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Jenis
                             </label>
-                            <input type="number" id="stok" name="stok"
-                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                placeholder="Masukan jumlah stok disini...">
+                            <select class="js-example-placeholder-single js-states form-control w-full"
+                                    name="jenis" id="jenis" data-placeholder="Pilih Jenis">
+                                    <option value="">Pilih...</option>
+                                    <option value="Sembako">Sembako</option>
+                                    <option value="Makanan">Makanan</option>
+                                    <option value="Minuman">Minuman</option>
+                                    <option value="Snack">Snack</option>
+                                    <option value="Produk Kebersihan">Produk Kebersihan</option>
+                                    <option value="Lain-Lain">Lain-Lain</option>
+                                </select>
+                        </div>
+                        <div class="">
+                            <label for=""
+                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Satuan
+                            </label>
+                            <select class="js-example-placeholder-single js-states form-control w-full" name="satuan"
+                                id="satuan" data-placeholder="Pilih Satuan">
+                                <option value="">Pilih...</option>
+                                <option value="Kg">Kg</option>
+                                <option value="Ons">Ons</option>
+                                <option value="Gram">Gram</option>
+                                <option value="Liter">Liter</option>
+                                <option value="Mililiter">Mililiter</option>
+                                <option value="Pcs">Pcs</option>
+                                <option value="Pack">Pack</option>
+                                <option value="Dus">Dus</option>
+                                <option value="Botol">Botol</option>
+                                <option value="Kaleng">Kaleng</option>
+                                <option value="Sachet">Sachet</option>
+                            </select>
                         </div>
                     </div>
                     <div class="flex items-center p-4 space-x-2 border-t border-gray-200 rounded-b">
@@ -191,17 +228,17 @@
         const formModal = document.getElementById('formSourceModal');
         const modalTarget = button.dataset.modalTarget;
         const id = button.dataset.id;
-        const kd_kategori = button.dataset.kd_kategori;
         const nama_barang = button.dataset.nama_barang;
-        const stok = button.dataset.stok;
+        const jenis = button.dataset.jenis;
+        const satuan = button.dataset.satuan;
         let url = "{{ route('barang.update', ':id') }}".replace(':id', id);
 
         let status = document.getElementById(modalTarget);
         document.getElementById('title_source').innerText = `Update Barang ${nama_barang}`;
 
-        document.getElementById('kd_kategori').value = kd_kategori;
         document.getElementById('nama_barang').value = nama_barang;
-        document.getElementById('stok').value = stok;
+        document.getElementById('jenis').value = jenis;
+        document.getElementById('satuan').value = satuan;
 
         document.getElementById('formSourceButton').innerText = 'Simpan';
         document.getElementById('formSourceModal').setAttribute('action', url);

@@ -14,10 +14,8 @@ class BarangController extends Controller
     public function index()
     {
         $barang = Barang::paginate(5);
-        $kd_kategori = KategoriBarang::all();
         return view('page.barang.index')->with([
             'barang' => $barang,
-            'kd_kategori' => $kd_kategori,
         ]);
     }
 
@@ -32,9 +30,9 @@ class BarangController extends Controller
     public function store(Request $request)
     {
         $data = [
-            'kd_kategori' => $request->input('kd_kategori'),
             'nama_barang' => $request->input('nama_barang'),
-            'stok' => $request->input('stok'),
+            'jenis' => $request->input('jenis'),
+            'satuan' => $request->input('satuan'),
         ];
 
         Barang::create($data);
@@ -66,9 +64,9 @@ class BarangController extends Controller
     public function update(Request $request, string $id)
     {
         $data = [
-            'kd_kategori' => $request->input('kd_kategori'),
             'nama_barang' => $request->input('nama_barang'),
-            'stok' => $request->input('stok'),
+            'jenis' => $request->input('jenis'),
+            'satuan' => $request->input('satuan'),
         ];
 
         $datas = Barang::findOrFail($id);

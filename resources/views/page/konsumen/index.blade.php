@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Kategori Barang') }}
+            {{ __('Menu Supplier') }}
         </h2>
     </x-slot>
 
@@ -9,36 +9,48 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-4">
-                    <div>Data Kategori Barang</div>
+                    <div>Data Barang</div>
                 </div>
                 <div class="p-6 text-gray-900 dark:text-gray-100 flex gap-5">
                     <div class="w-full bg-gray-100 p-4 rounded-xl">
                         <div class="mb-5">
-                            Input Data Kategori Barang
+                            Input Data Supplier
                         </div>
-                        <form action="{{ route('kategoribarang.store') }}" method="post">
+                        <form action="{{ route('konsumen.store') }}" method="post">
                             @csrf
-                            {{-- <div class="mb-5 w-full">
-                                <label for="kd_kategori"
-                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Kode
-                                    Kategori</label>
-                                <input type="text" id="base-input" name="kd_kategori" value="{{ $kd_kategori }}"
-                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                    placeholder="Kode Kategori" readonly required />
-                            </div> --}}
                             <div class="mb-5">
                                 <label for="base-input"
                                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nama
-                                    Kategori (e.g Makanan)</label>
-                                <input name="nama_kategori" type="text" id="base-input"
+                                    Supplier</label>
+                                <input name="nama_supplier" type="text" id="base-input"
                                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                    placeholder="Masukan nama kategori...">
+                                    placeholder="Masukan nama supplier...">
+                            </div>
+                            <div class="mb-5">
+                                <label for="base-input"
+                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">No. Telepon</label>
+                                <input name="no_telp" type="number" id="base-input"
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                    placeholder="Masukan nomor telepon...">
+                            </div>
+                            <div class="mb-5">
+                                <label for="base-input"
+                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email</label>
+                                <input name="email" type="text" id="base-input"
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                    placeholder="Masukan alamat email...">
+                            </div>
+                            <div class="mb-5">
+                                <label for="base-input"
+                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Alamat</label>
+                                <input name="alamat" type="text" id="base-input"
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                    placeholder="Masukan alamat...">
                             </div>
                             <button type="submit"
                                 class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">SIMPAN</button>
                         </form>
                     </div>
-                    {{-- TABLE MEMBER --}}
                     <div class="w-full">
                         <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
                             <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
@@ -48,11 +60,11 @@
                                         <th scope="col" class="px-6 py-3">
                                             NO
                                         </th>
-                                        {{-- <th scope="col" class="px-6 py-3">
-                                            Kode Kategori
-                                        </th> --}}
                                         <th scope="col" class="px-6 py-3">
-                                            Nama Kategori
+                                            Nama Supplier
+                                        </th>
+                                        <th scope="col" class="px-6 py-3">
+                                            Alamat
                                         </th>
                                         <th scope="col" class="px-6 py-3">
 
@@ -63,24 +75,24 @@
                                     @php
                                         $no = 1;
                                     @endphp
-                                    @foreach ($kategoribarang as $key => $k)
+                                    @foreach ($supplier as $key => $k)
                                         <tr
                                             class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                                             <th scope="row"
                                                 class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                                {{ $kategoribarang->perPage() * ($kategoribarang->currentPage() - 1) + $key + 1 }}
+                                                {{ $supplier->perPage() * ($supplier->currentPage() - 1) + $key + 1 }}
                                             </th>
-                                            {{-- <td class="px-6 py-4">
-                                                {{ $k->kd_kategori }}
-                                            </td> --}}
                                             <td class="px-6 py-4">
-                                                {{ $k->nama_kategori }}
+                                                {{ $k->nama_supplier }}
+                                            </td>
+                                            <td class="px-6 py-4">
+                                                {{ $k->alamat }}
                                             </td>
                                             <td class="px-6 py-4">
                                                 <button type="button" data-id="{{ $k->id }}"
                                                     data-modal-target="sourceModal"
-                                                    data-nama_kategori="{{ $k->nama_kategori }}"
-                                                    onclick="editSourceModal(this)"
+                                                    data-nama_supplier="{{ $k->nama_supplier }}"
+                                                    data-alamat="{{ $k->alamat }}" onclick="editSourceModal(this)"
                                                     class="bg-amber-500 hover:bg-amber-600 px-3 py-1 rounded-md text-xs text-white">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="16"
                                                         height="16" fill="currentColor" class="bi bi-pencil-fill"
@@ -90,7 +102,7 @@
                                                     </svg>
                                                 </button>
                                                 <button
-                                                    onclick="return kategoribarangDelete('{{ $k->id }}','{{ $k->nama_kategori }}')"
+                                                    onclick="return supplierDelete('{{ $k->id }}','{{ $k->nama_supplier }}','{{ $k->alamat }}')"
                                                     class="bg-red-500 hover:bg-bg-red-300 px-3 py-1 rounded-md text-xs text-white">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="16"
                                                         height="16" fill="currentColor" class="bi bi-trash3-fill"
@@ -106,14 +118,14 @@
                             </table>
                         </div>
                         <div class="mt-4">
-                            {{ $kategoribarang->links() }}
+                            {{ $supplier->links() }}
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="fixed inset-0 flex items-center justify-center z-50 hidden" id="sourceModal">
+    {{-- <div class="fixed inset-0 flex items-center justify-center z-50 hidden" id="sourceModal">
         <div class="fixed inset-0 bg-black opacity-50"></div>
         <div class="fixed inset-0 flex items-center justify-center">
             <div class="w-full md:w-1/2 relative bg-white rounded-lg shadow mx-5">
@@ -130,18 +142,19 @@
                 <form method="POST" id="formSourceModal">
                     @csrf
                     <div class="flex flex-col  p-4 space-y-6">
-                        {{-- <div class="">
-                            <label for="text" class="block mb-2 text-sm font-medium text-gray-900">Kode
-                                Kategori</label>
-                            <input type="text" id="kd_kategori" name="kd_kategori"
-                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                        </div> --}}
                         <div class="">
-                            <label for="text" class="block mb-2 text-sm font-medium text-gray-900">Nama
-                                Kategori</label>
-                            <input type="text" id="nama_kategori" name="nama_kategori"
+                            <label for="text" class="block mb-2 text-sm font-medium text-gray-900">Nama Supplier
+                            </label>
+                            <input type="text" id="nama_supplier" name="nama_supplier"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                placeholder="Masukan nama disini...">
+                                placeholder="Masukan nama supplier disini...">
+                        </div>
+                        <div class="">
+                            <label for="text" class="block mb-2 text-sm font-medium text-gray-900">Alamat
+                            </label>
+                            <input type="text" id="alamat" name="alamat"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                placeholder="Masukan alamat disini...">
                         </div>
                     </div>
                     <div class="flex items-center p-4 space-x-2 border-t border-gray-200 rounded-b">
@@ -153,21 +166,23 @@
                 </form>
             </div>
         </div>
-    </div>
+    </div> --}}
 </x-app-layout>
-<script>
+
+{{-- <script>
     const editSourceModal = (button) => {
         const formModal = document.getElementById('formSourceModal');
         const modalTarget = button.dataset.modalTarget;
         const id = button.dataset.id;
-        const nama_kategori = button.dataset.nama_kategori;
-        let url = "{{ route('kategoribarang.update', ':id') }}".replace(':id', id);
+        const nama_supplier = button.dataset.nama_supplier;
+        const alamat = button.dataset.alamat;
+        let url = "{{ route('supplier.update', ':id') }}".replace(':id', id);
 
         let status = document.getElementById(modalTarget);
-        document.getElementById('title_source').innerText = `Update Kategori Barang ${nama_kategori}`;
+        document.getElementById('title_source').innerText = `Update supplier ${nama_supplier}`;
 
-        // document.getElementById('kd_kategori').value = kd_kategori;
-        document.getElementById('nama_kategori').value = nama_kategori;
+        document.getElementById('nama_supplier').value = nama_supplier;
+        document.getElementById('alamat').value = alamat;
 
         document.getElementById('formSourceButton').innerText = 'Simpan';
         document.getElementById('formSourceModal').setAttribute('action', url);
@@ -191,28 +206,26 @@
         status.classList.toggle('hidden');
     }
 
-    const kategoribarangDelete = async (id, nama_kategori) => {
-        let tanya = confirm(`Apakah anda yakin untuk menghapus kategori barang ${nama_kategori} ?`);
+    const supplierDelete = async (id, nama_supplier) => {
+        let tanya = confirm(`Apakah anda yakin untuk menghapus supplier ini?`);
         if (tanya) {
             try {
-                const response = await axios.post(`/kategoribarang/${id}`, {
+                const response = await axios.post(`/supplier/${id}`, {
                     '_method': 'DELETE',
                     '_token': document.querySelector('meta[name="csrf-token"]').getAttribute(
                         'content')
                 });
 
                 if (response.status === 200) {
-                    alert('Kategori barang berhasil dihapus');
+                    alert('Barang berhasil dihapus');
                     location.reload();
                 } else {
-                    // alert('Gagal menghapus departemen. Silakan coba lagi.');
-                    location.windows('error.index');
+                    alert('Gagal menghapus barang. Silakan coba lagi.');
                 }
             } catch (error) {
                 console.error(error);
-                // alert('Terjadi kesalahan saat menghapus departemen. Silakan cek konsol untuk detail.');
-                location.windows('error.index');
+                alert('Terjadi kesalahan saat menghapus barang. Silakan cek konsol untuk detail.');
             }
         }
     };
-</script>
+</script> --}}

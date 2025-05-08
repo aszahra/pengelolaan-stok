@@ -11,7 +11,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::resource('kategoribarang', KategoriBarangController::class)->middleware('auth');
 Route::resource('barang', BarangController::class)->middleware('auth');
 Route::resource('supplier', SupplierController::class)->middleware('auth');
 

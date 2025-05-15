@@ -101,31 +101,6 @@
                 </div>
             </div>`;
 
-            // <div class="border border-2 rounded-xl p-3 mb-3" id="row${rowCount}">
-            //     <div class="flex flex-wrap gap-4">
-            //         <div class="w-full md:w-1/4">
-            //             <label class="block text-sm font-medium">Nama Barang</label>
-            //             <select name="barang_id[]" id="barang${rowCount}" class="barang-dropdown w-full p-2 rounded border">
-            //                 <option value="" disabled selected>Pilih Barang</option>
-            //                 ${barangList.map(barang =>
-            //                     `<option value="${barang.id}" data-jenis="${barang.jenis}" data-satuan="${barang.satuan}">${barang.nama_barang}</option>`
-            //                 ).join('')}
-            //             </select>
-            //         </div>
-            //         <div class="w-full md:w-1/4">
-            //             <label class="block text-sm font-medium">Jenis</label>
-            //             <input type="text" name="jenis[]" id="jenis${rowCount}" readonly class="w-full p-2 rounded border bg-gray-100" />
-            //         </div>
-            //         <div class="w-full md:w-1/4">
-            //             <label class="block text-sm font-medium">Satuan</label>
-            //             <input type="text" name="satuan[]" id="satuan${rowCount}" readonly class="w-full p-2 rounded border bg-gray-100" />
-            //         </div>
-            //         <div class="w-full md:w-1/4">
-            //             <label class="block text-sm font-medium">Jumlah</label>
-            //             <input type="number" name="jumlah[]" class="w-full p-2 rounded border" required min="1" />
-            //         </div>
-            //     </div>
-            // </div>
             $('#produkContainer').append(row);
             bindBarangDropdown(rowCount);
         }

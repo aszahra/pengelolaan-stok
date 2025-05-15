@@ -181,7 +181,7 @@
                             </label>
                             <select class="js-example-placeholder-single js-states form-control w-full"
                                     name="jenis" id="jenis" data-placeholder="Pilih Jenis">
-                                    <option value="">Pilih...</option>
+                                    <option value="" disabled selected>Pilih...</option>
                                     <option value="Sembako">Sembako</option>
                                     <option value="Makanan">Makanan</option>
                                     <option value="Minuman">Minuman</option>
@@ -196,7 +196,7 @@
                             </label>
                             <select class="js-example-placeholder-single js-states form-control w-full" name="satuan"
                                 id="satuan" data-placeholder="Pilih Satuan">
-                                <option value="">Pilih...</option>
+                                <option value="" disabled selected>Pilih...</option>
                                 <option value="Kg">Kg</option>
                                 <option value="Ons">Ons</option>
                                 <option value="Gram">Gram</option>

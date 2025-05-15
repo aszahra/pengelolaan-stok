@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Barang extends Model
+class DetailBarangMasuk extends Model
 {
     use HasFactory;
 
@@ -13,13 +13,8 @@ class Barang extends Model
         'nama_barang',
         'jenis',
         'satuan',
-        // 'stok',
+        'jumlah',
     ];
 
-    protected $table = 'barang';
-
-    public function barangmasuk()
-    {
-        return $this->hasMany(BarangMasuk::class, 'kd_barang');
-    }
+    protected $table = 'detail_barang_masuk';
 }

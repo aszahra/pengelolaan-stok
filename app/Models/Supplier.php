@@ -17,4 +17,9 @@ class Supplier extends Model
     ];
 
     protected $table = 'supplier';
+
+    public function barangmasuk()
+    {
+        return $this->hasMany(BarangMasuk::class, 'kd_supplier');
+    }
 }

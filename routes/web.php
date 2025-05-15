@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\BarangController;
+use App\Http\Controllers\BarangMasukController;
+use App\Http\Controllers\DetailBarangMasukController;
 use App\Http\Controllers\KategoriBarang;
 use App\Http\Controllers\KategoriBarangController;
 use App\Http\Controllers\KonsumenController;
@@ -15,6 +17,8 @@ Route::get('/', function () {
 Route::resource('barang', BarangController::class)->middleware('auth');
 Route::resource('supplier', SupplierController::class)->middleware('auth');
 Route::resource('konsumen', KonsumenController::class)->middleware('auth');
+Route::resource('barangmasuk', BarangMasukController::class)->middleware('auth');
+Route::resource('detailbarangmasuk', DetailBarangMasukController::class)->middleware('auth');
 
 Route::get('/dashboard', function () {
     return view('dashboard');

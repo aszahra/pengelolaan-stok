@@ -28,7 +28,8 @@
                             </div>
                             <div class="mb-5">
                                 <label for="base-input"
-                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">No. Telepon</label>
+                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">No.
+                                    Telepon</label>
                                 <input name="no_telp" type="number" id="base-input"
                                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                     placeholder="Masukan nomor telepon...">
@@ -36,7 +37,7 @@
                             <div class="mb-5">
                                 <label for="base-input"
                                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email</label>
-                                <input name="email" type="text" id="base-input"
+                                <input name="email" type="email" id="base-input"
                                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                     placeholder="Masukan alamat email...">
                             </div>
@@ -64,6 +65,12 @@
                                             Nama Supplier
                                         </th>
                                         <th scope="col" class="px-6 py-3">
+                                            Nomor Telepon
+                                        </th>
+                                        <th scope="col" class="px-6 py-3">
+                                            Email
+                                        </th>
+                                        <th scope="col" class="px-6 py-3">
                                             Alamat
                                         </th>
                                         <th scope="col" class="px-6 py-3">
@@ -86,12 +93,19 @@
                                                 {{ $k->nama_supplier }}
                                             </td>
                                             <td class="px-6 py-4">
+                                                {{ $k->no_telp }}
+                                            </td>
+                                            <td class="px-6 py-4">
+                                                {{ $k->email }}
+                                            </td>
+                                            <td class="px-6 py-4">
                                                 {{ $k->alamat }}
                                             </td>
                                             <td class="px-6 py-4">
                                                 <button type="button" data-id="{{ $k->id }}"
                                                     data-modal-target="sourceModal"
                                                     data-nama_supplier="{{ $k->nama_supplier }}"
+                                                    data-no_telp="{{ $k->no_telp }}" data-email="{{ $k->email }}"
                                                     data-alamat="{{ $k->alamat }}" onclick="editSourceModal(this)"
                                                     class="bg-amber-500 hover:bg-amber-600 px-3 py-1 rounded-md text-xs text-white">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="16"
@@ -150,6 +164,20 @@
                                 placeholder="Masukan nama supplier disini...">
                         </div>
                         <div class="">
+                            <label for="text" class="block mb-2 text-sm font-medium text-gray-900">Nomor Telepon
+                            </label>
+                            <input type="number" id="no_telp" name="no_telp"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                placeholder="Masukan nomor telepon disini...">
+                        </div>
+                        <div class="">
+                            <label for="text" class="block mb-2 text-sm font-medium text-gray-900">Email
+                            </label>
+                            <input type="email" id="email" name="email"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                placeholder="Masukan alamat disini...">
+                        </div>
+                        <div class="">
                             <label for="text" class="block mb-2 text-sm font-medium text-gray-900">Alamat
                             </label>
                             <input type="text" id="alamat" name="alamat"
@@ -175,6 +203,8 @@
         const modalTarget = button.dataset.modalTarget;
         const id = button.dataset.id;
         const nama_supplier = button.dataset.nama_supplier;
+        const no_telp = button.dataset.no_telp;
+        const email = button.dataset.email;
         const alamat = button.dataset.alamat;
         let url = "{{ route('supplier.update', ':id') }}".replace(':id', id);
 
@@ -182,6 +212,8 @@
         document.getElementById('title_source').innerText = `Update supplier ${nama_supplier}`;
 
         document.getElementById('nama_supplier').value = nama_supplier;
+        document.getElementById('no_telp').value = no_telp;
+        document.getElementById('email').value = email;
         document.getElementById('alamat').value = alamat;
 
         document.getElementById('formSourceButton').innerText = 'Simpan';

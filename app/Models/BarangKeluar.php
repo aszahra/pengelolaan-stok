@@ -13,7 +13,7 @@ class BarangKeluar extends Model
         'kd_konsumen',
         'tanggal',
         'keterangan',
-        'kd_user',
+        'id_user',
     ];
 
     protected $table = 'barang_keluar';

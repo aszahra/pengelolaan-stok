@@ -74,16 +74,12 @@
                 <div class="flex mb-2 gap-4">
                     <div class="mb-5 w-full">
                         <label class="block text-sm font-medium">Nama Barang</label>
-                        <select name="barang_id[]" id="barang${rowCount}" class="barang-dropdown w-full p-2 rounded border">
+                        <select name="kd_barang[]" id="barang${rowCount}" class="barang-dropdown w-full p-2 rounded border">
                             <option value="" disabled selected>Pilih Barang</option>
                             ${barangList.map(barang =>
                                 `<option value="${barang.id}" data-jenis="${barang.jenis}" data-satuan="${barang.satuan}">${barang.nama_barang}</option>`
                             ).join('')}
                         </select>
-                    </div>
-                    <div class="mb-5 w-full">
-                        <label class="block text-sm font-medium">Jenis</label>
-                        <input type="text" name="jenis[]" id="jenis${rowCount}" readonly class="w-full p-2 rounded border bg-gray-100" />
                     </div>
                     <div class="mb-5 w-full">
                         <label class="block text-sm font-medium">Jumlah</label>
@@ -95,7 +91,7 @@
                     </div>
                     <div class="mb-5 w-full">
                         <label class="block text-sm font-medium">Status Barang</label>
-                        <select name="status[]" id="status${rowCount}" class="w-full p-2 rounded border" required>
+                        <select type="text" name="status[]" id="status${rowCount}" class="w-full p-2 rounded border" required>
                             <option value="" disabled selected>Pilih Status</option>
                             <option value="baik">Baik</option>
                             <option value="rusak">Rusak</option>

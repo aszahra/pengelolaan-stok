@@ -10,10 +10,10 @@ class DetailBarangMasuk extends Model
     use HasFactory;
 
     protected $fillable = [
-        'nama_barang',
-        'jenis',
-        'satuan',
+        'kd_barang',
         'jumlah',
+        'satuan',
+        'status',
     ];
 
     protected $table = 'detail_barang_masuk';

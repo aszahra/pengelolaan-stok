@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('kd_supplier');
             $table->dateTime('tgl_pembelian');
-            $table->dateTime('status');
-            $table->string('kd_user');
+            // $table->dateTime('status');
+            $table->string('kd_user')->nullable();
             $table->timestamps();
         });
     }

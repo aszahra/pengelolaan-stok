@@ -15,7 +15,7 @@ class BarangMasukController extends Controller
      */
     public function index()
     {
-        $data = BarangMasuk::paginate(5);
+        $data = BarangMasuk::paginate(10);
         return view('page.barangmasuk.index')->with([
             'data' => $data,
         ]);
@@ -40,37 +40,59 @@ class BarangMasukController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'kd_supplier' => 'required',
-            'tgl_pembelian' => 'required|date',
-            'kd_user' => 'required',
-            'barang_id' => 'required|array',
-            'barang_id.*' => 'required|exists:barang,id',
-            'jumlah' => 'required|array',
-            'jumlah.*' => 'required|numeric|min:1',
-            'satuan' => 'required|array',
-            'satuan.*' => 'required|string',
-        ]);
+        // BarangMasuk::create([
+        //     'kd_supplier' => $request->input('kd_supplier'),
+        //     'tgl_pembelian' => $request->input('tgl_pembelian'),
+        //     'kd_user' => $request->input('kd_user')
+        // ]);
+
+        // DetailBarangMasuk::create([
+        //     'kd_barang' => $request->input('kd_barang'),
+        //     'jumlah' => $request->input('jumlah'),
+        //     'satuan' => $request->input('satuan'),
+        // ]);
+
+        // $data = [
+        //     'kd_supplier' => $request->input('kd_supplier'),
+        //     'tgl_pembelian' => $request->input('tgl_pembelian'),
+        //     'kd_user' => $request->input('kd_user')
+        // ];
+
+        // $dataDetail = [
+        //     'kd_barang' => $request->input('kd_barang'),
+        //     'jumlah' => $request->input('jumlah'),
+        //     'satuan' => $request->input('satuan'),
+        // ];
+
+        // BarangMasuk::create($data);
+        // DetailBarangMasuk::create($dataDetail);
+
+        // return redirect()
+        //     ->route('barangmasuk.index')
+        //     ->with('message', 'Data sudah ditambahkan');
 
         $barangMasuk = BarangMasuk::create([
-            'kd_supplier' => $request->kd_supplier,
-            'tgl_pembelian' => $request->tgl_pembelian,
-            'status' => $request->status,
-            'kd_user' => $request->kd_user,
+            'kd_supplier' => $request->input('kd_supplier'),
+            'tgl_pembelian' => $request->input('tgl_pembelian'),
+            'kd_user' => $request->input('kd_user')
         ]);
 
-        foreach ($request->barang_id as $index => $barangId) {
+        $kd_barang = $request->input('kd_barang');
+        $jumlah = $request->input('jumlah');
+        $satuan = $request->input('satuan');
+        $status = $request->input('status');
+
+        for ($i = 0; $i < count($kd_barang); $i++) {
             DetailBarangMasuk::create([
-                'kd_supplier' => $request->kd_supplier,
-                'kd_barang' => $barangId,
-                'jumlah' => $request->jumlah[$index],
-                'satuan' => $request->satuan[$index],
+                'id_barang_masuk' => $barangMasuk->id,
+                'kd_barang' => $kd_barang[$i],
+                'jumlah' => $jumlah[$i],
+                'satuan' => $satuan[$i],
+                'status' => $status[$i]
             ]);
         }
 
-        return redirect()
-            ->route('barangmasuk.index')
-            ->with('message', 'Data sudah ditambahkan');
+        return redirect()->route('barangmasuk.index')->with('message', 'Data sudah ditambahkan');
     }
 
     /**

@@ -12,7 +12,7 @@ class BarangMasuk extends Model
     protected $fillable = [
         'kd_supplier',
         'tgl_pembelian',
-        'status',
+        // 'status',
     ];
 
     protected $table = 'barang_masuk';

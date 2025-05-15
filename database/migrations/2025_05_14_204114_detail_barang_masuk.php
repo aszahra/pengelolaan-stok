@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('kd_barang');
             $table->integer('jumlah');
             $table->string('satuan');
+            $table->string('status');
             $table->timestamps();
         });
     }

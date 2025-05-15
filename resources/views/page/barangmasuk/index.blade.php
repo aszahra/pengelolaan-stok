@@ -12,7 +12,7 @@
                     <div class="p-4 bg-gray-100 mb-2 rounded-xl font-bold">
                         <div class="flex items-center justify-between">
                             <div class="w-full">
-                                Barang Masuk
+                                Daftar Barang Masuk
                             </div>
                             <div>
                                 <a href="{{ route('barangmasuk.create') }}"
@@ -35,14 +35,14 @@
                                         <th scope="col" class="px-6 py-3">
                                             TANGGAL PEMBELIAN
                                         </th>
-                                        {{-- <th scope="col" class="px-6 py-3">
+                                        <th scope="col" class="px-6 py-3">
                                             ACTION
-                                        </th> --}}
+                                        </th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @php
-                                        $no = 1;
+                                        $no = $data->firstItem();
                                     @endphp
                                     @foreach ($data as $f)
                                         <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
@@ -56,13 +56,12 @@
                                             <td class="px-6 py-4 bg-gray-100">
                                                 {{ $f->tgl_pembelian }}
                                             </td>
-                                            {{-- <td class="px-6 py-4 bg-gray-100">
+                                            <td class="px-6 py-4 bg-gray-100">
                                                 <button
-                                                    class="bg-red-400 p-3 w-10 h-10 rounded-xl text-white hover:bg-red-500"
-                                                    onclick="return dataDelete('{{ $f->id }}','{{ $f->konsumen->nama_konsumen }}')">
-                                                    <i class="fi fi-sr-delete-document"></i>
+                                                    class="bg-green-400 p-2 w-20 h-10 rounded-xl text-white hover:bg-green-500">
+                                                    <label for="">Detail</label>
                                                     </button>
-                                            </td> --}}
+                                            </td>
                                         </tr>
                                     @endforeach
                                 </tbody>

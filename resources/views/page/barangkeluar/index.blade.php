@@ -12,7 +12,7 @@
                     <div class="p-4 bg-gray-100 mb-2 rounded-xl font-bold">
                         <div class="flex items-center justify-between">
                             <div class="w-full">
-                                Barang Keluar
+                                Daftar Barang Keluar
                             </div>
                             <div>
                                 <a href="{{ route('barangkeluar.create') }}"
@@ -35,6 +35,9 @@
                                         <th scope="col" class="px-6 py-3">
                                             TANGGAL KELUAR
                                         </th>
+                                        <th scope="col" class="px-6 py-3">
+                                            ACTION
+                                        </th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -52,6 +55,12 @@
                                             </td>
                                             <td class="px-6 py-4 bg-gray-100">
                                                 {{ $f->tanggal }}
+                                            </td>
+                                            <td class="px-6 py-4 bg-gray-100">
+                                                <button
+                                                    class="bg-green-400 p-2 w-20 h-10 rounded-xl text-white hover:bg-green-500">
+                                                    <label for="">Detail</label>
+                                                    </button>
                                             </td>
                                         </tr>
                                     @endforeach

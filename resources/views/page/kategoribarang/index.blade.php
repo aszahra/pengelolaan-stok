@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Menu Barang') }}
+            {{ __('Menu Kategori Barang') }}
         </h2>
     </x-slot>
 
@@ -9,61 +9,22 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-4">
-                    <div>Data Barang</div>
+                    <div>Data Kategori Barang</div>
                 </div>
                 <div class="p-6 text-gray-900 dark:text-gray-100 flex gap-5">
                     <div class="w-full bg-gray-100 p-4 rounded-xl">
                         <div class="mb-5">
-                            Input Data Barang
+                            Input Data Kategori Barang
                         </div>
-                        <form action="{{ route('barang.store') }}" method="post">
+                        <form action="{{ route('kategoribarang.store') }}" method="post">
                             @csrf
                             <div class="mb-5">
                                 <label for="base-input"
                                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nama
-                                    Barang</label>
-                                <input name="nama_barang" type="text" id="base-input"
-                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                    placeholder="Masukan nama barang...">
-                            </div>
-                            <div class="mb-5 w-full">
-                                <label for="kd_kategori"
-                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Kategori
-                                    Barang</label>
-                                <select class="js-example-placeholder-single js-states form-control w-full"
-                                    name="kd_kategori" placeholder="Pilih Kategori Barang">
-                                    <option value="" disabled selected>Pilih Kategori Barang...</option>
-                                    @foreach ($kategoribarang as $k)
-                                        <option value="{{ $k->id }}">{{ $k->nama_kategori }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            <div class="mb-5">
-                                <label for="base-input"
-                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Stok
-                                    Barang</label>
-                                <input name="stok" type="number" id="base-input"
-                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                    placeholder="Masukan stok barang...">
-                            </div>
-                            <div class="mb-5">
-                                <label for="base-input"
-                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Satuan</label>
-                                <select class="js-example-placeholder-single js-states form-control w-full"
-                                    name="satuan" data-placeholder="Pilih Satuan">
-                                    <option value="">Pilih...</option>
-                                    <option value="Kg">Kg</option>
-                                    <option value="Ons">Ons</option>
-                                    <option value="Gram">Gram</option>
-                                    <option value="Liter">Liter</option>
-                                    <option value="Mililiter">Mililiter</option>
-                                    <option value="Pcs">Pcs</option>
-                                    <option value="Pack">Pack</option>
-                                    <option value="Dus">Dus</option>
-                                    <option value="Botol">Botol</option>
-                                    <option value="Kaleng">Kaleng</option>
-                                    <option value="Sachet">Sachet</option>
-                                </select>
+                                    Kategori</label>
+                                    <input name="nama_kategori" type="text" id="base-input"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                        placeholder="Masukan nama kategori barang...">
                             </div>
                             <button type="submit"
                                 class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">SIMPAN</button>
@@ -79,19 +40,7 @@
                                             NO
                                         </th>
                                         <th scope="col" class="px-6 py-3">
-                                            Nama Barang
-                                        </th>
-                                        <th scope="col" class="px-6 py-3">
-                                            Kategori Barang
-                                        </th>
-                                        <th scope="col" class="px-6 py-3">
-                                            Stok Barang
-                                        </th>
-                                        <th scope="col" class="px-6 py-3">
-                                            Satuan
-                                        </th>
-                                        <th scope="col" class="px-6 py-3">
-
+                                            Nama Kategori
                                         </th>
                                     </tr>
                                 </thead>
@@ -99,31 +48,21 @@
                                     @php
                                         $no = 1;
                                     @endphp
-                                    @foreach ($barang as $key => $k)
+                                    @foreach ($kategoribarang as $key => $k)
                                         <tr
                                             class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                                             <th scope="row"
                                                 class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                                {{ $barang->perPage() * ($barang->currentPage() - 1) + $key + 1 }}
+                                                {{ $kategoribarang->perPage() * ($kategoribarang->currentPage() - 1) + $key + 1 }}
                                             </th>
                                             <td class="px-6 py-4">
-                                                {{ $k->nama_barang }}
-                                            </td>
-                                            <td class="px-6 py-4">
-                                                {{ $k->kategoribarang->nama_kategori }}
-                                            </td>
-                                            <td class="px-6 py-4">
-                                                {{ $k->stok }}
-                                            </td>
-                                            <td class="px-6 py-4">
-                                                {{ $k->satuan }}
+                                                {{ $k->nama_kategori }}
                                             </td>
                                             <td class="px-6 py-4">
                                                 <button type="button" data-id="{{ $k->id }}"
                                                     data-modal-target="sourceModal"
-                                                    data-nama_barang="{{ $k->nama_barang }}"
-                                                    data-kategori_barang="{{ $k->kategori_barang }}"
-                                                    data-satuan="{{ $k->satuan }}" onclick="editSourceModal(this)"
+                                                    data-nama_kategori="{{ $k->nama_kategori }}"
+                                                    onclick="editSourceModal(this)"
                                                     class="bg-amber-500 hover:bg-amber-600 px-3 py-1 rounded-md text-xs text-white">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="16"
                                                         height="16" fill="currentColor" class="bi bi-pencil-fill"
@@ -133,7 +72,7 @@
                                                     </svg>
                                                 </button>
                                                 <button
-                                                    onclick="return barangDelete('{{ $k->id }}','{{ $k->nama_barang }}','{{ $k->jenis }}','{{ $k->satuan }}')"
+                                                    onclick="return kategoribarangDelete('{{ $k->id }}','{{ $k->nama_kategori }}')"
                                                     class="bg-red-500 hover:bg-bg-red-300 px-3 py-1 rounded-md text-xs text-white">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="16"
                                                         height="16" fill="currentColor" class="bi bi-trash3-fill"
@@ -149,7 +88,7 @@
                             </table>
                         </div>
                         <div class="mt-4">
-                            {{ $barang->links() }}
+                            {{ $kategoribarang->links() }}
                         </div>
                     </div>
                 </div>
@@ -175,49 +114,10 @@
                     <div class="flex flex-col  p-4 space-y-6">
                         <div class="">
                             <label for="text" class="block mb-2 text-sm font-medium text-gray-900">Nama
-                                Barang</label>
-                            <input type="text" id="nama_barang" name="nama_barang"
+                                Kategori</label>
+                            <input type="text" id="nama_kategori" name="nama_kategori"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                placeholder="Masukan nama barang disini...">
-                        </div>
-                        <div class="">
-                            <label for=""
-                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Kategori Barang
-                            </label>
-                            <select class="js-example-placeholder-single js-states form-control w-full"
-                                name="kd_kategori" placeholder="Pilih Kategori Barang">
-                                <option value="" disabled selected>Pilih Kategori Barang...</option>
-                                @foreach ($kategoribarang as $k)
-                                    <option value="{{ $k->id }}">{{ $k->nama_kategori }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                        <div class="">
-                            <label for="" class="block mb-2 text-sm font-medium text-gray-900">Stok
-                                Barang</label>
-                            <input type="number" id="stok" name="stok"
-                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                placeholder="Masukan stok barang disini...">
-                        </div>
-                        <div class="">
-                            <label for=""
-                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Satuan
-                            </label>
-                            <select class="js-example-placeholder-single js-states form-control w-full" name="satuan"
-                                id="satuan" data-placeholder="Pilih Satuan">
-                                <option value="" disabled selected>Pilih...</option>
-                                <option value="Kg">Kg</option>
-                                <option value="Ons">Ons</option>
-                                <option value="Gram">Gram</option>
-                                <option value="Liter">Liter</option>
-                                <option value="Mililiter">Mililiter</option>
-                                <option value="Pcs">Pcs</option>
-                                <option value="Pack">Pack</option>
-                                <option value="Dus">Dus</option>
-                                <option value="Botol">Botol</option>
-                                <option value="Kaleng">Kaleng</option>
-                                <option value="Sachet">Sachet</option>
-                            </select>
+                                placeholder="Masukan nama kategori disini...">
                         </div>
                     </div>
                     <div class="flex items-center p-4 space-x-2 border-t border-gray-200 rounded-b">
@@ -237,19 +137,13 @@
         const formModal = document.getElementById('formSourceModal');
         const modalTarget = button.dataset.modalTarget;
         const id = button.dataset.id;
-        const nama_barang = button.dataset.nama_barang;
-        const kd_kategori = button.dataset.kd_kategori;
-        const stok = button.dataset.stok;
-        const satuan = button.dataset.satuan;
-        let url = "{{ route('barang.update', ':id') }}".replace(':id', id);
+        const nama_kategori = button.dataset.nama_kategori;
+        let url = "{{ route('kategoribarang.update', ':id') }}".replace(':id', id);
 
         let status = document.getElementById(modalTarget);
-        document.getElementById('title_source').innerText = `Update Barang ${nama_barang}`;
+        document.getElementById('title_source').innerText = `Update Barang ${nama_kategori}`;
 
-        document.getElementById('nama_barang').value = nama_barang;
-        document.getElementById('kd_kategori').value = kd_kategori;
-        document.getElementById('stok').value = stok;
-        document.getElementById('satuan').value = satuan;
+        document.getElementById('nama_kategori').value = nama_kategori;
 
         document.getElementById('formSourceButton').innerText = 'Simpan';
         document.getElementById('formSourceModal').setAttribute('action', url);
@@ -273,11 +167,11 @@
         status.classList.toggle('hidden');
     }
 
-    const barangDelete = async (id, nama_barang) => {
-        let tanya = confirm(`Apakah anda yakin untuk menghapus barang ini?`);
+    const kategoribarangDelete = async (id, nama_kategori) => {
+        let tanya = confirm(`Apakah anda yakin untuk menghapus kategori barang ini?`);
         if (tanya) {
             try {
-                const response = await axios.post(`/barang/${id}`, {
+                const response = await axios.post(`/kategoribarang/${id}`, {
                     '_method': 'DELETE',
                     '_token': document.querySelector('meta[name="csrf-token"]').getAttribute(
                         'content')

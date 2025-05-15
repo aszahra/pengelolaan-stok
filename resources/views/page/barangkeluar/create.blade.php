@@ -50,11 +50,12 @@
                             </div>
                             <div class="p-4 bg-gray-100 mb-6 rounded-xl font-bold">
                                 <div class="flex items-center justify-between">
-                                    <div class="w-full">
+                                    <div class="flex">
                                         Detail Barang Keluar
                                     </div>
                                     <button type="button" id="addRowBtn"
-                                        class="bg-sky-400 hover:bg-sky-500 text-white px-2 rounded-xl">+</button>
+                                        class="bg-sky-400 hover:bg-sky-500 text-white p-2 rounded-xl">Tambah
+                                        Barang</button>
                                 </div>
                             </div>
                             <div id="produkContainer"></div>

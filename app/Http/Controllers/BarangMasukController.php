@@ -40,37 +40,6 @@ class BarangMasukController extends Controller
      */
     public function store(Request $request)
     {
-        // BarangMasuk::create([
-        //     'kd_supplier' => $request->input('kd_supplier'),
-        //     'tgl_pembelian' => $request->input('tgl_pembelian'),
-        //     'kd_user' => $request->input('kd_user')
-        // ]);
-
-        // DetailBarangMasuk::create([
-        //     'kd_barang' => $request->input('kd_barang'),
-        //     'jumlah' => $request->input('jumlah'),
-        //     'satuan' => $request->input('satuan'),
-        // ]);
-
-        // $data = [
-        //     'kd_supplier' => $request->input('kd_supplier'),
-        //     'tgl_pembelian' => $request->input('tgl_pembelian'),
-        //     'kd_user' => $request->input('kd_user')
-        // ];
-
-        // $dataDetail = [
-        //     'kd_barang' => $request->input('kd_barang'),
-        //     'jumlah' => $request->input('jumlah'),
-        //     'satuan' => $request->input('satuan'),
-        // ];
-
-        // BarangMasuk::create($data);
-        // DetailBarangMasuk::create($dataDetail);
-
-        // return redirect()
-        //     ->route('barangmasuk.index')
-        //     ->with('message', 'Data sudah ditambahkan');
-
         $barangMasuk = BarangMasuk::create([
             'kd_supplier' => $request->input('kd_supplier'),
             'tgl_pembelian' => $request->input('tgl_pembelian'),
@@ -80,7 +49,7 @@ class BarangMasukController extends Controller
         $kd_barang = $request->input('kd_barang');
         $jumlah = $request->input('jumlah');
         $satuan = $request->input('satuan');
-        $status = $request->input('status');
+        $stok = $request->input('stok'); // Ini hanya buat tampilan, tidak wajib diinsert ke DB jika stok dihitung otomatis
 
         for ($i = 0; $i < count($kd_barang); $i++) {
             DetailBarangMasuk::create([
@@ -88,12 +57,20 @@ class BarangMasukController extends Controller
                 'kd_barang' => $kd_barang[$i],
                 'jumlah' => $jumlah[$i],
                 'satuan' => $satuan[$i],
-                'status' => $status[$i]
+                'stok' => $stok[$i] // boleh dihapus kalau kamu tidak ingin simpan stok awal di detail
             ]);
+
+            // Tambahkan stok ke tabel barang
+            $barang = Barang::find($kd_barang[$i]);
+            if ($barang) {
+                $barang->stok += $jumlah[$i];
+                $barang->save();
+            }
         }
 
-        return redirect()->route('barangmasuk.index')->with('message', 'Data sudah ditambahkan');
+        return redirect()->route('barangmasuk.index')->with('message', 'Data sudah ditambahkan dan stok barang diperbarui');
     }
+
 
     /**
      * Display the specified resource.

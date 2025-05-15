@@ -41,19 +41,30 @@
                             </div>
                             <div class="p-4 bg-gray-100 mb-6 rounded-xl font-bold">
                                 <div class="flex items-center justify-between">
-                                    <div class="w-full">
+                                    <div class="flex">
                                         Detail Barang Masuk
                                     </div>
                                     <button type="button" id="addRowBtn"
-                                        class="bg-sky-400 hover:bg-sky-500 text-white px-2 rounded-xl">+</button>
+                                        class="bg-sky-400 hover:bg-sky-500 text-white p-2 rounded-xl">Tambah
+                                        Barang</button>
                                 </div>
                             </div>
                             <div id="produkContainer"></div>
+                            {{-- =================== --}}
+                            {{-- <div class="gap-5 flex">
+                                <div class="mb-5 ">
+                                    <label for="total"
+                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Jumlah
+                                        Total</label>
+                                    <input type="number" id="total" name="total"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                        readonly required />
+                                </div>
+                            </div> --}}
                             <button type="submit"
                                 class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit</button>
                         </form>
                     </div>
-                    {{-- =================== --}}
                 </div>
             </div>
         </div>
@@ -77,7 +88,7 @@
                         <select name="kd_barang[]" id="barang${rowCount}" class="barang-dropdown w-full p-2 rounded border">
                             <option value="" disabled selected>Pilih Barang</option>
                             ${barangList.map(barang =>
-                                `<option value="${barang.id}" data-jenis="${barang.jenis}" data-satuan="${barang.satuan}">${barang.nama_barang}</option>`
+                                `<option value="${barang.id}" data-stok="${barang.stok}" data-satuan="${barang.satuan}">${barang.nama_barang}</option>`
                             ).join('')}
                         </select>
                     </div>
@@ -90,42 +101,12 @@
                         <input type="text" name="satuan[]" id="satuan${rowCount}" readonly class="w-full p-2 rounded border bg-gray-100" />
                     </div>
                     <div class="mb-5 w-full">
-                        <label class="block text-sm font-medium">Status Barang</label>
-                        <select type="text" name="status[]" id="status${rowCount}" class="w-full p-2 rounded border" required>
-                            <option value="" disabled selected>Pilih Status</option>
-                            <option value="baik">Baik</option>
-                            <option value="rusak">Rusak</option>
-                            <option value="kurang">Kurang</option>
-                        </select>
+                        <label class="block text-sm font-medium">Stok</label>
+                        <input type="number" name="stok[]" id="stok${rowCount}" readonly class="w-full p-2 rounded border bg-gray-100" />
                     </div>
                 </div>
             </div>`;
 
-            // <div class="border border-2 rounded-xl p-3 mb-3" id="row${rowCount}">
-            //     <div class="flex flex-wrap gap-4">
-            //         <div class="w-full md:w-1/4">
-            //             <label class="block text-sm font-medium">Nama Barang</label>
-            //             <select name="barang_id[]" id="barang${rowCount}" class="barang-dropdown w-full p-2 rounded border">
-            //                 <option value="" disabled selected>Pilih Barang</option>
-            //                 ${barangList.map(barang =>
-            //                     `<option value="${barang.id}" data-jenis="${barang.jenis}" data-satuan="${barang.satuan}">${barang.nama_barang}</option>`
-            //                 ).join('')}
-            //             </select>
-            //         </div>
-            //         <div class="w-full md:w-1/4">
-            //             <label class="block text-sm font-medium">Jenis</label>
-            //             <input type="text" name="jenis[]" id="jenis${rowCount}" readonly class="w-full p-2 rounded border bg-gray-100" />
-            //         </div>
-            //         <div class="w-full md:w-1/4">
-            //             <label class="block text-sm font-medium">Satuan</label>
-            //             <input type="text" name="satuan[]" id="satuan${rowCount}" readonly class="w-full p-2 rounded border bg-gray-100" />
-            //         </div>
-            //         <div class="w-full md:w-1/4">
-            //             <label class="block text-sm font-medium">Jumlah</label>
-            //             <input type="number" name="jumlah[]" class="w-full p-2 rounded border" required min="1" />
-            //         </div>
-            //     </div>
-            // </div>
             $('#produkContainer').append(row);
             bindBarangDropdown(rowCount);
         }
@@ -133,8 +114,8 @@
         function bindBarangDropdown(id) {
             $(`#barang${id}`).change(function() {
                 const selected = $(this).find(':selected');
-                $(`#jenis${id}`).val(selected.data('jenis') || '');
                 $(`#satuan${id}`).val(selected.data('satuan') || '');
+                $(`#stok${id}`).val(selected.data('stok') || '');
             });
         }
 
@@ -149,4 +130,25 @@
             $(`#row${id}`).remove();
         }
     </script>
+
+    <script>
+        function hitungTotal() {
+            let total = 0;
+            $('input[name="jumlah[]"]').each(function(i) {
+                const jumlah = parseInt($(this).val()) || 0;
+                const stok = parseInt($('input[name="stok[]"]').eq(i).val()) || 0;
+                total += jumlah + stok;
+            });
+            $('#total').val(total);
+        }
+
+        $(document).on('input', 'input[name="jumlah[]"]', function() {
+            hitungTotal();
+        });
+
+        $(document).on('change', '.barang-dropdown', function() {
+            hitungTotal();
+        });
+    </script>
+
 </x-app-layout>

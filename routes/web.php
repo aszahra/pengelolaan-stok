@@ -23,6 +23,7 @@ Route::resource('barangmasuk', BarangMasukController::class)->middleware('auth')
 Route::resource('detailbarangmasuk', DetailBarangMasukController::class)->middleware('auth');
 Route::resource('barangkeluar', BarangKeluarController::class)->middleware('auth');
 Route::resource('detailbarangkeluar', DetailBarangKeluarController::class)->middleware('auth');
+Route::resource('kategoribarang', KategoriBarangController::class)->middleware('auth');
 
 Route::get('/dashboard', function () {
     return view('dashboard');

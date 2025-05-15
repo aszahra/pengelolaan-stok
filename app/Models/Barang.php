@@ -22,4 +22,9 @@ class Barang extends Model
     {
         return $this->hasMany(BarangMasuk::class, 'kd_barang');
     }
+
+    public function barangkeluar()
+    {
+        return $this->hasMany(BarangKeluar::class, 'kd_barang');
+    }
 }

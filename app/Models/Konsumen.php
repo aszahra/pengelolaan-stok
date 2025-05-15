@@ -17,4 +17,9 @@ class Konsumen extends Model
     ];
 
     protected $table = 'konsumen';
+
+    public function barangkeluar()
+    {
+        return $this->hasMany(BarangKeluar::class, 'kd_konsumen');
+    }
 }

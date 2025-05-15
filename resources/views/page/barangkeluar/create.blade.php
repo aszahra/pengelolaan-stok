@@ -19,30 +19,39 @@
                             @csrf
                             <div class="flex gap-5">
                                 <div class="mb-5 w-full">
-                                    <label for="kd_supplier"
+                                    <label for="kd_konsumen"
                                         class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Supplier</label>
                                     <select class="js-example-placeholder-single js-states form-control w-full"
-                                        name="kd_supplier" placeholder="Pilih Supplier">
+                                        name="kd_konsumen" placeholder="Pilih Konsumen">
                                         <option value="" disabled selected>Pilih...</option>
-                                        @foreach ($supplier as $k)
-                                            <option value="{{ $k->id }}">{{ $k->nama_supplier }}</option>
+                                        @foreach ($konsumen as $k)
+                                            <option value="{{ $k->id }}">{{ $k->nama_konsumen }}</option>
                                         @endforeach
                                     </select>
                                 </div>
                                 <div class="mb-5 w-full">
-                                    <label for="tgl_pembelian"
+                                    <label for="tanggal"
                                         class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tanggal
-                                        Pembelian</label>
-                                    <input type="date" id="tgl_pembelian" name="tgl_pembelian"
-                                        value="{{ date('Y-m-d') }}"
+                                        Keluar</label>
+                                    <input type="date" id="tanggal" name="tanggal" value="{{ date('Y-m-d') }}"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                         required />
                                 </div>
+                            </div class="flex gap-5 mb-5 w-full">
+                            <div class="mb-5 w-full">
+                                <label for="keterangan"
+                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Keterangan</label>
+                                <input name="keterangan" type="text" id="base-input"
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                    placeholder="Masukan keterangan...">
+                            </div>
+                            <div>
+
                             </div>
                             <div class="p-4 bg-gray-100 mb-6 rounded-xl font-bold">
                                 <div class="flex items-center justify-between">
                                     <div class="w-full">
-                                        Detail Barang Masuk
+                                        Detail Barang Keluar
                                     </div>
                                     <button type="button" id="addRowBtn"
                                         class="bg-sky-400 hover:bg-sky-500 text-white px-2 rounded-xl">+</button>
@@ -88,15 +97,6 @@
                     <div class="mb-5 w-full">
                         <label class="block text-sm font-medium">Satuan</label>
                         <input type="text" name="satuan[]" id="satuan${rowCount}" readonly class="w-full p-2 rounded border bg-gray-100" />
-                    </div>
-                    <div class="mb-5 w-full">
-                        <label class="block text-sm font-medium">Status Barang</label>
-                        <select type="text" name="status[]" id="status${rowCount}" class="w-full p-2 rounded border" required>
-                            <option value="" disabled selected>Pilih Status</option>
-                            <option value="baik">Baik</option>
-                            <option value="rusak">Rusak</option>
-                            <option value="kurang">Kurang</option>
-                        </select>
                     </div>
                 </div>
             </div>`;

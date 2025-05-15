@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Barang;
 use App\Models\BarangKeluar;
+use App\Models\Konsumen;
 use Illuminate\Http\Request;
 
 class BarangKeluarController extends Controller
@@ -24,7 +26,12 @@ class BarangKeluarController extends Controller
      */
     public function create()
     {
-        //
+        $barang = Barang::all();
+        $konsumen = Konsumen::all();
+        return view('page.barangkeluar.create')->with([
+            'barang' => $barang,
+            'konsumen' => $konsumen
+        ]);
     }
 
     /**

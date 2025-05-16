@@ -87,7 +87,7 @@
                         <select name="kd_barang[]" id="barang${rowCount}" class="barang-dropdown w-full p-2 rounded border">
                             <option value="" disabled selected>Pilih Barang</option>
                             ${barangList.map(barang =>
-                                `<option value="${barang.id}" data-jenis="${barang.jenis}" data-satuan="${barang.satuan}">${barang.nama_barang}</option>`
+                                `<option value="${barang.id}" data-stok="${barang.stok}" data-satuan="${barang.satuan}">${barang.nama_barang}</option>`
                             ).join('')}
                         </select>
                     </div>
@@ -98,6 +98,10 @@
                     <div class="mb-5 w-full">
                         <label class="block text-sm font-medium">Satuan</label>
                         <input type="text" name="satuan[]" id="satuan${rowCount}" readonly class="w-full p-2 rounded border bg-gray-100" />
+                    </div>
+                    <div class="mb-5 w-full">
+                        <label class="block text-sm font-medium">Stok</label>
+                        <input type="number" name="stok[]" id="stok${rowCount}" readonly class="w-full p-2 rounded border bg-gray-100" />
                     </div>
                 </div>
             </div>`;
@@ -111,6 +115,7 @@
                 const selected = $(this).find(':selected');
                 $(`#jenis${id}`).val(selected.data('jenis') || '');
                 $(`#satuan${id}`).val(selected.data('satuan') || '');
+                $(`#stok${id}`).val(selected.data('stok') || '');
             });
         }
 

@@ -49,7 +49,7 @@ class BarangMasukController extends Controller
         $kd_barang = $request->input('kd_barang');
         $jumlah = $request->input('jumlah');
         $satuan = $request->input('satuan');
-        $stok = $request->input('stok'); // Ini hanya buat tampilan, tidak wajib diinsert ke DB jika stok dihitung otomatis
+        $stok = $request->input('stok'); 
 
         for ($i = 0; $i < count($kd_barang); $i++) {
             DetailBarangMasuk::create([
@@ -57,10 +57,9 @@ class BarangMasukController extends Controller
                 'kd_barang' => $kd_barang[$i],
                 'jumlah' => $jumlah[$i],
                 'satuan' => $satuan[$i],
-                'stok' => $stok[$i] // boleh dihapus kalau kamu tidak ingin simpan stok awal di detail
+                'stok' => $stok[$i] 
             ]);
 
-            // Tambahkan stok ke tabel barang
             $barang = Barang::find($kd_barang[$i]);
             if ($barang) {
                 $barang->stok += $jumlah[$i];

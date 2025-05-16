@@ -44,12 +44,13 @@ class BarangKeluarController extends Controller
             'kd_konsumen' => $request->input('kd_konsumen'),
             'tanggal' => $request->input('tanggal'),
             'keterangan' => $request->input('keterangan'),
-            'kd_user' => $request->input('kd_user')
+            'id_user' => $request->input('id_user')
         ]);
 
         $kd_barang = $request->input('kd_barang');
         $jumlah = $request->input('jumlah');
         $satuan = $request->input('satuan');
+        $stok = $request->input('stok');
 
         for ($i = 0; $i < count($kd_barang); $i++) {
             DetailBarangKeluar::create([
@@ -57,11 +58,19 @@ class BarangKeluarController extends Controller
                 'kd_barang' => $kd_barang[$i],
                 'jumlah' => $jumlah[$i],
                 'satuan' => $satuan[$i],
+                'stok' => $stok[$i]
             ]);
+
+            $barang = Barang::find($kd_barang[$i]);
+            if ($barang) {
+                $barang->stok -= $jumlah[$i];
+                $barang->save();
+            }
         }
 
-        return redirect()->route('barangkeluar.index')->with('message', 'Data sudah ditambahkan');
+        return redirect()->route('barangmasuk.index')->with('message', 'Data sudah ditambahkan dan stok barang diperbarui');
     }
+
 
     /**
      * Display the specified resource.

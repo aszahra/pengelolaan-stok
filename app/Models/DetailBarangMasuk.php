@@ -13,7 +13,7 @@ class DetailBarangMasuk extends Model
         'kd_barang',
         'jumlah',
         'satuan',
-        'status',
+        'stok',
     ];
 
     protected $table = 'detail_barang_masuk';

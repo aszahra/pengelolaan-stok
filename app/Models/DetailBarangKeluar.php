@@ -10,6 +10,7 @@ class DetailBarangKeluar extends Model
     use HasFactory;
 
     protected $fillable = [
+        'kd_barang_keluar',
         'kd_barang',
         'jumlah',
         'satuan',
@@ -17,4 +18,9 @@ class DetailBarangKeluar extends Model
     ];
 
     protected $table = 'detail_barang_keluar';
+
+    public function barangKeluar()
+    {
+        return $this->belongsTo(BarangKeluar::class, 'kd_barang_keluar', 'id');
+    }
 }

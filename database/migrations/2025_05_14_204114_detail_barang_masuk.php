@@ -13,10 +13,11 @@ return new class extends Migration
     {
         Schema::create('detail_barang_masuk', function (Blueprint $table) {
             $table->id();
+            $table->string('kd_barang_masuk');
             $table->string('kd_barang');
             $table->integer('jumlah');
             $table->string('satuan');
-            $table->string('status');
+            $table->integer('stok');
             $table->timestamps();
         });
     }

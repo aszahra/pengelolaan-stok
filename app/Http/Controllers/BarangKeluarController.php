@@ -54,7 +54,7 @@ class BarangKeluarController extends Controller
 
         for ($i = 0; $i < count($kd_barang); $i++) {
             DetailBarangKeluar::create([
-                'id_barang_keluar' => $barangKeluar->id,
+                'kd_barang_keluar' => $barangKeluar->id,
                 'kd_barang' => $kd_barang[$i],
                 'jumlah' => $jumlah[$i],
                 'satuan' => $satuan[$i],

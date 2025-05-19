@@ -24,14 +24,14 @@
                                     Barang</label>
                                 <input name="nama_barang" type="text" id="base-input"
                                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                    placeholder="Masukan nama barang...">
+                                    placeholder="Masukan nama barang..." required>
                             </div>
                             <div class="mb-5 w-full">
                                 <label for="kd_kategori"
                                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Kategori
                                     Barang</label>
                                 <select class="js-example-placeholder-single js-states form-control w-full"
-                                    name="kd_kategori" placeholder="Pilih Kategori Barang">
+                                    name="kd_kategori" id="base-input" placeholder="Pilih Kategori Barang" required>
                                     <option value="" disabled selected>Pilih Kategori Barang...</option>
                                     @foreach ($kategoribarang as $k)
                                         <option value="{{ $k->id }}">{{ $k->nama_kategori }}</option>
@@ -44,13 +44,13 @@
                                     Barang</label>
                                 <input name="stok" type="number" id="base-input"
                                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                    placeholder="Masukan stok barang...">
+                                    placeholder="Masukan stok barang..." required>
                             </div>
                             <div class="mb-5">
                                 <label for="base-input"
                                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Satuan</label>
                                 <select class="js-example-placeholder-single js-states form-control w-full"
-                                    name="satuan" data-placeholder="Pilih Satuan">
+                                    name="satuan" data-placeholder="Pilih Satuan" required>
                                     <option value="">Pilih...</option>
                                     <option value="Kg">Kg</option>
                                     <option value="Ons">Ons</option>
@@ -122,8 +122,9 @@
                                                 <button type="button" data-id="{{ $k->id }}"
                                                     data-modal-target="sourceModal"
                                                     data-nama_barang="{{ $k->nama_barang }}"
-                                                    data-kategori_barang="{{ $k->kategori_barang }}"
-                                                    data-satuan="{{ $k->satuan }}" onclick="editSourceModal(this)"
+                                                    data-kd_kategori="{{ $k->kd_kategori }}"
+                                                    data-stok="{{ $k->stok }}" data-satuan="{{ $k->satuan }}"
+                                                    onclick="editSourceModal(this)"
                                                     class="bg-amber-500 hover:bg-amber-600 px-3 py-1 rounded-md text-xs text-white">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="16"
                                                         height="16" fill="currentColor" class="bi bi-pencil-fill"
@@ -133,7 +134,7 @@
                                                     </svg>
                                                 </button>
                                                 <button
-                                                    onclick="return barangDelete('{{ $k->id }}','{{ $k->nama_barang }}','{{ $k->jenis }}','{{ $k->satuan }}')"
+                                                    onclick="return barangDelete('{{ $k->id }}','{{ $k->nama_barang }}','{{ $k->kd_kategori }}','{{ $k->stok }}','{{ $k->satuan }}')"
                                                     class="bg-red-500 hover:bg-bg-red-300 px-3 py-1 rounded-md text-xs text-white">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="16"
                                                         height="16" fill="currentColor" class="bi bi-trash3-fill"
@@ -185,7 +186,7 @@
                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Kategori Barang
                             </label>
                             <select class="js-example-placeholder-single js-states form-control w-full"
-                                name="kd_kategori" placeholder="Pilih Kategori Barang">
+                                name="kd_kategori" id="kd_kategori" placeholder="Pilih Kategori Barang">
                                 <option value="" disabled selected>Pilih Kategori Barang...</option>
                                 @foreach ($kategoribarang as $k)
                                     <option value="{{ $k->id }}">{{ $k->nama_kategori }}</option>
@@ -274,7 +275,7 @@
     }
 
     const barangDelete = async (id, nama_barang) => {
-        let tanya = confirm(`Apakah anda yakin untuk menghapus barang ini?`);
+        let tanya = confirm(`Apakah anda yakin untuk menghapus ${nama_barang}?`);
         if (tanya) {
             try {
                 const response = await axios.post(`/barang/${id}`, {

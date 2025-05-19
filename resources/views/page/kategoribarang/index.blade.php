@@ -24,7 +24,7 @@
                                     Kategori</label>
                                     <input name="nama_kategori" type="text" id="base-input"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                        placeholder="Masukan nama kategori barang...">
+                                        placeholder="Masukan nama kategori barang..." required>
                             </div>
                             <button type="submit"
                                 class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">SIMPAN</button>
@@ -117,7 +117,7 @@
                                 Kategori</label>
                             <input type="text" id="nama_kategori" name="nama_kategori"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                placeholder="Masukan nama kategori disini...">
+                                placeholder="Masukan nama kategori disini..." required>
                         </div>
                     </div>
                     <div class="flex items-center p-4 space-x-2 border-t border-gray-200 rounded-b">
@@ -141,7 +141,7 @@
         let url = "{{ route('kategoribarang.update', ':id') }}".replace(':id', id);
 
         let status = document.getElementById(modalTarget);
-        document.getElementById('title_source').innerText = `Update Barang ${nama_kategori}`;
+        document.getElementById('title_source').innerText = `Update Kategori Barang ${nama_kategori}`;
 
         document.getElementById('nama_kategori').value = nama_kategori;
 
@@ -168,7 +168,7 @@
     }
 
     const kategoribarangDelete = async (id, nama_kategori) => {
-        let tanya = confirm(`Apakah anda yakin untuk menghapus kategori barang ini?`);
+        let tanya = confirm(`Apakah anda yakin untuk menghapus kategori barang ${nama_kategori}?`);
         if (tanya) {
             try {
                 const response = await axios.post(`/kategoribarang/${id}`, {
@@ -178,14 +178,14 @@
                 });
 
                 if (response.status === 200) {
-                    alert('Barang berhasil dihapus');
+                    alert('Kategori barang berhasil dihapus');
                     location.reload();
                 } else {
-                    alert('Gagal menghapus barang. Silakan coba lagi.');
+                    alert('Gagal menghapus kategori barang. Silakan coba lagi.');
                 }
             } catch (error) {
                 console.error(error);
-                alert('Terjadi kesalahan saat menghapus barang. Silakan cek konsol untuk detail.');
+                alert('Terjadi kesalahan saat menghapus kategori barang. Silakan cek konsol untuk detail.');
             }
         }
     };

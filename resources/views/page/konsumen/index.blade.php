@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Menu Supplier') }}
+            {{ __('Menu Konsumen') }}
         </h2>
     </x-slot>
 
@@ -9,7 +9,7 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-4">
-                    <div>Data Barang</div>
+                    <div>Data Konsumen</div>
                 </div>
                 <div class="p-6 text-gray-900 dark:text-gray-100 flex gap-5">
                     <div class="w-full bg-gray-100 p-4 rounded-xl">
@@ -24,7 +24,7 @@
                                     Konsumen</label>
                                 <input name="nama_konsumen" type="text" id="base-input"
                                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                    placeholder="Masukan nama konsumen...">
+                                    placeholder="Masukan nama konsumen..." required>
                             </div>
                             <div class="mb-5">
                                 <label for="base-input"
@@ -32,21 +32,21 @@
                                     Telepon</label>
                                 <input name="no_telp" type="number" id="base-input"
                                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                    placeholder="Masukan nomor telepon...">
+                                    placeholder="Masukan nomor telepon..." required>
                             </div>
                             <div class="mb-5">
                                 <label for="base-input"
                                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email</label>
                                 <input name="email" type="email" id="base-input"
                                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                    placeholder="Masukan alamat email...">
+                                    placeholder="Masukan alamat email..." required>
                             </div>
                             <div class="mb-5">
                                 <label for="base-input"
                                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Alamat</label>
                                 <input name="alamat" type="text" id="base-input"
                                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                    placeholder="Masukan alamat...">
+                                    placeholder="Masukan alamat..." required>
                             </div>
                             <button type="submit"
                                 class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">SIMPAN</button>
@@ -117,7 +117,7 @@
                                                     </svg>
                                                 </button>
                                                 <button
-                                                    onclick="return supplierDelete('{{ $k->id }}','{{ $k->nama_konsumen }}','{{ $k->no_telp }}','{{ $k->email }}','{{ $k->alamat }}')"
+                                                    onclick="return konsumenDelete('{{ $k->id }}','{{ $k->nama_konsumen }}','{{ $k->no_telp }}','{{ $k->email }}','{{ $k->alamat }}')"
                                                     class="bg-red-500 hover:bg-bg-red-300 px-3 py-1 rounded-md text-xs text-white">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="16"
                                                         height="16" fill="currentColor" class="bi bi-trash3-fill"
@@ -162,28 +162,28 @@
                             </label>
                             <input type="text" id="nama_konsumen" name="nama_konsumen"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                placeholder="Masukan nama konsumen disini...">
+                                placeholder="Masukan nama konsumen disini..." required>
                         </div>
                         <div class="">
                             <label for="text" class="block mb-2 text-sm font-medium text-gray-900">No. Telepon
                             </label>
                             <input type="text" id="no_telp" name="no_telp"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                placeholder="Masukan nomor telepon disini...">
+                                placeholder="Masukan nomor telepon disini..." required>
                         </div>
                         <div class="">
                             <label for="text" class="block mb-2 text-sm font-medium text-gray-900">Email
                             </label>
                             <input type="text" id="email" name="email"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                placeholder="Masukan email disini...">
+                                placeholder="Masukan email disini..." required>
                         </div>
                         <div class="">
                             <label for="text" class="block mb-2 text-sm font-medium text-gray-900">Alamat
                             </label>
                             <input type="text" id="alamat" name="alamat"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                placeholder="Masukan alamat disini...">
+                                placeholder="Masukan alamat disini..." required>
                         </div>
                     </div>
                     <div class="flex items-center p-4 space-x-2 border-t border-gray-200 rounded-b">
@@ -198,19 +198,23 @@
     </div>
 </x-app-layout>
 
-{{-- <script>
+<script>
     const editSourceModal = (button) => {
         const formModal = document.getElementById('formSourceModal');
         const modalTarget = button.dataset.modalTarget;
         const id = button.dataset.id;
-        const nama_supplier = button.dataset.nama_supplier;
+        const nama_konsumen = button.dataset.nama_konsumen;
+        const no_telp = button.dataset.no_telp;
+        const email = button.dataset.email;
         const alamat = button.dataset.alamat;
-        let url = "{{ route('supplier.update', ':id') }}".replace(':id', id);
+        let url = "{{ route('konsumen.update', ':id') }}".replace(':id', id);
 
         let status = document.getElementById(modalTarget);
-        document.getElementById('title_source').innerText = `Update supplier ${nama_supplier}`;
+        document.getElementById('title_source').innerText = `Update Konsumen ${nama_konsumen}`;
 
-        document.getElementById('nama_supplier').value = nama_supplier;
+        document.getElementById('nama_konsumen').value = nama_konsumen;
+        document.getElementById('no_telp').value = no_telp;
+        document.getElementById('email').value = email;
         document.getElementById('alamat').value = alamat;
 
         document.getElementById('formSourceButton').innerText = 'Simpan';
@@ -235,26 +239,26 @@
         status.classList.toggle('hidden');
     }
 
-    const supplierDelete = async (id, nama_supplier) => {
-        let tanya = confirm(`Apakah anda yakin untuk menghapus supplier ini?`);
+    const konsumenDelete = async (id, nama_konsumen) => {
+        let tanya = confirm(`Apakah anda yakin untuk menghapus konsumen ${nama_konsumen}?`);
         if (tanya) {
             try {
-                const response = await axios.post(`/supplier/${id}`, {
+                const response = await axios.post(`/konsumen/${id}`, {
                     '_method': 'DELETE',
                     '_token': document.querySelector('meta[name="csrf-token"]').getAttribute(
                         'content')
                 });
 
                 if (response.status === 200) {
-                    alert('Barang berhasil dihapus');
+                    alert('Konsumen berhasil dihapus');
                     location.reload();
                 } else {
-                    alert('Gagal menghapus barang. Silakan coba lagi.');
+                    alert('Gagal menghapus konsumen. Silakan coba lagi.');
                 }
             } catch (error) {
                 console.error(error);
-                alert('Terjadi kesalahan saat menghapus barang. Silakan cek konsol untuk detail.');
+                alert('Terjadi kesalahan saat menghapus konsumen. Silakan cek konsol untuk detail.');
             }
         }
     };
-</script> --}}
+</script>

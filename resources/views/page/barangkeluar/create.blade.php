@@ -70,15 +70,15 @@
     <script>
         let rowCount = 0;
 
-        const barangList = @json($barang->toArray() ?? []); // Pakai toArray
+        const barangList = @json($barang->toArray() ?? []); 
 
-        console.log("Data barang:", barangList); // Debug
+        console.log("Data barang:", barangList); 
 
         function addRow() {
             rowCount++;
             const row = `
             <div class="border border-2 rounded-xl p-3 mb-3" id="row${rowCount}">
-                <div class="flex mb-2 gap-4">
+                <div class="flex items-center gap-4">
                     <div class="mb-5 w-full">
                         <label class="block text-sm font-medium">Nama Barang</label>
                         <select name="kd_barang[]" id="barang${rowCount}" class="barang-dropdown w-full p-2 rounded border">
@@ -100,6 +100,11 @@
                         <label class="block text-sm font-medium">Stok</label>
                         <input type="number" name="stok[]" id="stok${rowCount}" readonly class="w-full p-2 rounded border bg-gray-100" />
                     </div>
+                    <div class="flex flex-col justify-end w-1/12">
+                            <button type="button" onclick="removeRow(${rowCount})" class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded">
+                                Batal
+                            </button>
+                        </div>
                 </div>
             </div>`;
 

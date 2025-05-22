@@ -17,7 +17,7 @@
                     </x-nav-link>
                 </div>
 
-                @can('role-S')
+                {{-- @can('role-S') --}}
                     <div class="hidden sm:flex sm:items-center sm:ms-6">
                         <li class="relative list-none">
                             <x-dropdown>
@@ -52,11 +52,15 @@
                                     <x-dropdown-link :href="route('konsumen.index')">
                                         {{ __('Konsumen') }}
                                     </x-dropdown-link>
+
+                                    <x-dropdown-link :href="route('user.index')">
+                                        {{ __('User') }}
+                                    </x-dropdown-link>
                                 </x-slot>
                             </x-dropdown>
                         </li>
                     </div>
-                @endcan
+                {{-- @endcan --}}
 
                 {{-- <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">

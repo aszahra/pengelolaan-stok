@@ -14,8 +14,12 @@ class BarangController extends Controller
     public function index()
     {
         $kategoribarang = KategoriBarang::all();
-        $barang = Barang::paginate(5);
-        return view('page.barang.index')->with([
+        $barang = Barang::with('barangmasukDet', 'barangkeluarDet')->paginate(5);
+        // return view('page.barang.index')->with([
+        //     'kategoribarang' => $kategoribarang,
+        //     'barang' => $barang,
+        // ]);
+        return view('page.barang.index', [
             'kategoribarang' => $kategoribarang,
             'barang' => $barang,
         ]);

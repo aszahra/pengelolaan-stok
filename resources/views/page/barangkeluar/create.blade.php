@@ -71,7 +71,9 @@
         </div>
     </div>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
+    {{-- ${barangList.map(barang =>
+                                `<option value="${barang.id}" data-stok="${barang.stok}" data-satuan="${barang.satuan}">${barang.nama_barang}</option>`
+                            ).join('')} --}}
     <script>
         let rowCount = 0;
 
@@ -86,11 +88,12 @@
                 <div class="flex items-center gap-4">
                     <div class="mb-5 w-full">
                         <label class="block text-sm font-medium">Nama Barang</label>
-                        <select name="kd_barang[]" id="barang${rowCount}" class="barang-dropdown w-full p-2 rounded border">
+                        <select name="kd_barang[]" id="barang${rowCount}" class="barang-dropdown w-full p-2 rounded border" required>
                             <option value="" disabled selected>Pilih Barang</option>
-                            ${barangList.map(barang =>
-                                `<option value="${barang.id}" data-stok="${barang.stok}" data-satuan="${barang.satuan}">${barang.nama_barang}</option>`
-                            ).join('')}
+                            ${barangList.filter(barang => barang.stok > 0).map(barang =>
+        `<option value="${barang.id}" data-stok="${barang.stok}" data-satuan="${barang.satuan}">${barang.nama_barang}</option>`
+    ).join('')}
+
                         </select>
                     </div>
                     <div class="mb-5 w-full">
@@ -99,11 +102,11 @@
                     </div>
                     <div class="mb-5 w-full">
                         <label class="block text-sm font-medium">Satuan</label>
-                        <input type="text" name="satuan[]" id="satuan${rowCount}" readonly class="w-full p-2 rounded border bg-gray-100" />
+                        <input type="text" name="satuan[]" id="satuan${rowCount}" readonly class="w-full p-2 rounded border bg-gray-100" required />
                     </div>
                     <div class="mb-5 w-full">
                         <label class="block text-sm font-medium">Stok</label>
-                        <input type="number" name="stok[]" id="stok${rowCount}" readonly class="w-full p-2 rounded border bg-gray-100" />
+                        <input type="number" name="stok[]" id="stok${rowCount}" readonly class="w-full p-2 rounded border bg-gray-100" required/>
                     </div>
                     <div class="flex flex-col justify-end w-1/12">
                             <button type="button" onclick="removeRow(${rowCount})" class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded">

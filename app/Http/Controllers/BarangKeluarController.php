@@ -45,13 +45,21 @@ class BarangKeluarController extends Controller
             'kd_konsumen' => $request->input('kd_konsumen'),
             'tanggal' => $request->input('tanggal'),
             // 'keterangan' => $request->input('keterangan'),
-            'id_user' => $request->input('id_user')
+            // 'id_user' => $request->input('id_user')
         ]);
 
         $kd_barang = $request->input('kd_barang');
         $jumlah = $request->input('jumlah');
         $satuan = $request->input('satuan');
         $stok = $request->input('stok');
+
+        for ($i = 0; $i < count($kd_barang); $i++) {
+            if ((int)$stok[$i] <= 0) {
+                return back()->withInput()->withErrors([
+                    "kd_barang.{$i}" => "Barang dengan kode {$kd_barang[$i]} tidak bisa dipilih karena stok kosong.",
+                ]);
+            }
+        }
 
         for ($i = 0; $i < count($kd_barang); $i++) {
             DetailBarangKeluar::create([

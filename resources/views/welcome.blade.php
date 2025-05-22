@@ -60,7 +60,7 @@
         <div class="container d-flex justify-content-between align-items-center">
             <a class="navbar-brand d-flex align-items-center gap-2" href="#">
                 <x-application-logo class="h-8 w-auto text-dark" />
-                <span class="fw-bold text-dark">StokBarang</span>
+                <span class="fw-bold text-dark">sz punya</span>
             </a>
             <a href="{{ route('login') }}" class="btn btn-primary">Login</a>
         </div>
@@ -69,9 +69,9 @@
     <main class="flex-grow-1 d-flex align-items-center justify-content-center fade-in">
         <section class="hero text-center">
             <div class="container">
-                <h1 class="display-5 fw-bold">Selamat Datang di StokBarang</h1>
+                <h1 class="display-5 fw-bold">Selamat Datang di Aplikasi Kelola Stok Barang</h1>
                 <p class="lead">Aplikasi Pengelolaan Stok Barang yang Mudah dan Efisien.</p>
-                <a href="{{ route('login') }}" class="btn btn-primary btn-lg mt-3">Masuk Sekarang</a>
+                <a href="{{ route('login') }}" class="btn btn-primary btn-lg mt-3">Login Sekarang</a>
             </div>
         </section>
     </main>

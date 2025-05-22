@@ -3,6 +3,7 @@
 use App\Http\Controllers\BarangController;
 use App\Http\Controllers\BarangKeluarController;
 use App\Http\Controllers\BarangMasukController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DetailBarangKeluarController;
 use App\Http\Controllers\DetailBarangMasukController;
 use App\Http\Controllers\KategoriBarang;
@@ -11,6 +12,7 @@ use App\Http\Controllers\KonsumenController;
 use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SupplierController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -26,6 +28,8 @@ Route::resource('barangkeluar', BarangKeluarController::class)->middleware('auth
 Route::resource('detailbarangkeluar', DetailBarangKeluarController::class)->middleware('auth');
 Route::resource('kategoribarang', KategoriBarangController::class)->middleware('auth');
 Route::resource('laporan', LaporanController::class)->middleware('auth');
+Route::resource('user', UserController::class)->middleware('auth');
+// Route::resource('dashboard', DashboardController::class)->middleware('auth');
 
 Route::get('/dashboard', function () {
     return view('dashboard');

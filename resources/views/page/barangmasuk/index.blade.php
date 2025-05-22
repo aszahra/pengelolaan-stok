@@ -91,8 +91,10 @@
     </div>
 
     <div id="detailModal" class="fixed z-50 inset-0 overflow-y-auto hidden">
+        <div class="fixed inset-0 bg-black opacity-50" onclick="closeModal()"></div>
+
         <div class="flex items-center justify-center min-h-screen px-4">
-            <div class="bg-white rounded-lg shadow-xl w-full max-w-2xl">
+            <div class="bg-white rounded-lg shadow-xl w-full max-w-2xl relative z-50">
                 <div class="p-4 border-b flex justify-between items-center">
                     <h3 class="text-lg font-bold">Detail Barang Masuk</h3>
                     <button onclick="closeModal()" class="text-gray-500 hover:text-red-600">&times;</button>
@@ -109,8 +111,8 @@
                 </div>
             </div>
         </div>
-        <div class="fixed inset-0 bg-black opacity-50" onclick="closeModal()"></div>
     </div>
+
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     <script>

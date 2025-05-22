@@ -57,10 +57,23 @@
                                                 {{ $f->tgl_pembelian }}
                                             </td>
                                             <td class="px-6 py-4 bg-gray-100">
+                                                @php
+                                                    $detailBarang = $f->detailbarangmasuk->map(function ($d) {
+                                                        return [
+                                                            'nama_barang' =>
+                                                                $d->barang->nama_barang ?? 'Tidak diketahui',
+                                                            'jumlah' => $d->jumlah,
+                                                            'satuan' => $d->satuan,
+                                                        ];
+                                                    });
+                                                @endphp
                                                 <button
-                                                    class="bg-green-400 p-2 w-20 h-10 rounded-xl text-white hover:bg-green-500">
-                                                    <label for="">Detail</label>
-                                                    </button>
+                                                    class="bg-green-400 p-2 w-20 h-10 rounded-xl text-white hover:bg-green-500 detailBtn"
+                                                    data-supplier="{{ $f->supplier->nama_supplier }}"
+                                                    data-tanggal="{{ $f->tgl_pembelian }}"
+                                                    data-detail='@json($detailBarang)'>
+                                                    Detail
+                                                </button>
                                             </td>
                                         </tr>
                                     @endforeach
@@ -76,27 +89,58 @@
             </div>
         </div>
     </div>
-    {{-- <script>
-        const dataDelete = async (id, nama_konsumen) => {
-            let tanya = confirm(`Apakah anda yakin untuk menghapus transaksi ${nama_konsumen}?`);
-            if (tanya) {
-                try {
-                    const response = await axios.post(`/penjualan/${id}`, {
-                        '_method': 'DELETE',
-                        '_token': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-                    });
 
-                    if (response.status === 200) {
-                        alert('Transaksi berhasil dihapus');
-                        location.reload();
-                    } else {
-                        alert('Gagal menghapus transaksi. Silakan coba lagi.');
-                    }
-                } catch (error) {
-                    console.error(error);
-                    alert('Terjadi kesalahan saat menghapus transaksi. Silakan cek konsol untuk detail.');
+    <div id="detailModal" class="fixed z-50 inset-0 overflow-y-auto hidden">
+        <div class="flex items-center justify-center min-h-screen px-4">
+            <div class="bg-white rounded-lg shadow-xl w-full max-w-2xl">
+                <div class="p-4 border-b flex justify-between items-center">
+                    <h3 class="text-lg font-bold">Detail Barang Masuk</h3>
+                    <button onclick="closeModal()" class="text-gray-500 hover:text-red-600">&times;</button>
+                </div>
+                <div class="p-4">
+                    <p><strong>Supplier:</strong> <span id="modalSupplier"></span></p>
+                    <p><strong>Tanggal Pembelian:</strong> <span id="modalTanggal"></span></p>
+                    <div class="mt-4">
+                        <strong>Detail Barang:</strong>
+                        <ul id="modalDetailList" class="list-disc list-inside mt-2 text-sm text-gray-700">
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="fixed inset-0 bg-black opacity-50" onclick="closeModal()"></div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script>
+        function closeModal() {
+            $('#detailModal').addClass('hidden');
+        }
+
+        $(document).ready(function() {
+            $('.detailBtn').click(function() {
+                const supplier = $(this).data('supplier');
+                const tanggal = $(this).data('tanggal');
+                const details = $(this).data('detail');
+
+                $('#modalSupplier').text(supplier);
+                $('#modalTanggal').text(tanggal);
+
+                let detailHtml = '';
+                if (details && details.length > 0) {
+                    details.forEach(item => {
+                        detailHtml +=
+                            `<li>${item.nama_barang ?? 'Barang'} - ${item.jumlah} ${item.satuan}</li>`;
+                    });
+                } else {
+                    detailHtml = '<li>Tidak ada data detail barang.</li>';
                 }
-            }
-        };
-    </script> --}}
+
+                $('#modalDetailList').html(detailHtml);
+                $('#detailModal').removeClass('hidden');
+            });
+        });
+    </script>
+
 </x-app-layout>

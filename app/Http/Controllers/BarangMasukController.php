@@ -15,7 +15,8 @@ class BarangMasukController extends Controller
      */
     public function index()
     {
-        $data = BarangMasuk::paginate(10);
+        $data = BarangMasuk::with(['supplier', 'detailbarangmasuk.barang'])->paginate(10);
+        // $data = BarangMasuk::paginate(10);
         return view('page.barangmasuk.index')->with([
             'data' => $data,
         ]);
@@ -43,7 +44,7 @@ class BarangMasukController extends Controller
         $barangMasuk = BarangMasuk::create([
             'kd_supplier' => $request->input('kd_supplier'),
             'tgl_pembelian' => $request->input('tgl_pembelian'),
-            'kd_user' => $request->input('kd_user')
+            // 'kd_user' => $request->input('kd_user')
         ]);
 
         $kd_barang = $request->input('kd_barang');

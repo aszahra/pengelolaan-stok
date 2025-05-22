@@ -51,7 +51,7 @@
                             </div>
                             <div id="produkContainer"></div>
                             <button type="submit"
-                                class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit</button>
+                                class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Simpan</button>
                         </form>
                     </div>
                 </div>
@@ -70,35 +70,40 @@
         function addRow() {
             rowCount++;
             const row = `
-            <div class="border border-2 rounded-xl p-3 mb-3" id="row${rowCount}">
-                <div class="flex mb-2 gap-4">
-                    <div class="mb-5 w-full">
-                        <label class="block text-sm font-medium">Nama Barang</label>
-                        <select name="kd_barang[]" id="barang${rowCount}" class="barang-dropdown w-full p-2 rounded border required">
-                            <option value="" disabled selected>Pilih Barang</option>
-                            ${barangList.map(barang =>
-                                `<option value="${barang.id}" data-stok="${barang.stok}" data-satuan="${barang.satuan}">${barang.nama_barang}</option>`
-                            ).join('')}
-                        </select>
+                <div class="border border-2 rounded-xl p-3 mb-3" id="row${rowCount}">
+                    <div class="flex items-center gap-4">
+                        <div class="mb-5 w-full">
+                            <label class="block text-sm font-medium">Nama Barang</label>
+                            <select name="kd_barang[]" id="barang${rowCount}" class="barang-dropdown w-full p-2 rounded border required">
+                                <option value="" disabled selected>Pilih Barang</option>
+                                ${barangList.map(barang =>
+                                    `<option value="${barang.id}" data-stok="${barang.stok}" data-satuan="${barang.satuan}">${barang.nama_barang}</option>`
+                                ).join('')}
+                            </select>
+                        </div>
+                        <div class="mb-5 w-full">
+                            <label class="block text-sm font-medium">Jumlah</label>
+                            <input type="number" name="jumlah[]" class="w-full p-2 rounded border" required min="1" />
+                        </div>
+                        <div class="mb-5 w-full">
+                            <label class="block text-sm font-medium">Satuan</label>
+                            <input type="text" name="satuan[]" id="satuan${rowCount}" readonly class="w-full p-2 rounded border bg-gray-100" />
+                        </div>
+                        <div class="mb-5 w-full">
+                            <label class="block text-sm font-medium">Stok</label>
+                            <input type="number" name="stok[]" id="stok${rowCount}" readonly class="w-full p-2 rounded border bg-gray-100" />
+                        </div>
+                        <div class="flex flex-col justify-end w-1/12">
+                            <button type="button" onclick="removeRow(${rowCount})" class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded">
+                                Batal
+                            </button>
+                        </div>
                     </div>
-                    <div class="mb-5 w-full">
-                        <label class="block text-sm font-medium">Jumlah</label>
-                        <input type="number" name="jumlah[]" class="w-full p-2 rounded border" required min="1" />
-                    </div>
-                    <div class="mb-5 w-full">
-                        <label class="block text-sm font-medium">Satuan</label>
-                        <input type="text" name="satuan[]" id="satuan${rowCount}" readonly class="w-full p-2 rounded border bg-gray-100" />
-                    </div>
-                    <div class="mb-5 w-full">
-                        <label class="block text-sm font-medium">Stok</label>
-                        <input type="number" name="stok[]" id="stok${rowCount}" readonly class="w-full p-2 rounded border bg-gray-100" />
-                    </div>
-                </div>
-            </div>`;
-
+                </div>`;
             $('#produkContainer').append(row);
             bindBarangDropdown(rowCount);
         }
+
 
         // function bindBarangDropdown(id) {
         //     $(`#barang${id}`).change(function() {
@@ -131,25 +136,5 @@
             $(`#row${id}`).remove();
         }
     </script>
-    {{-- 
-    <script>
-        function hitungTotal() {
-            let total = 0;
-            $('input[name="jumlah[]"]').each(function(i) {
-                const jumlah = parseInt($(this).val()) || 0;
-                const stok = parseInt($('input[name="stok[]"]').eq(i).val()) || 0;
-                total += jumlah + stok;
-            });
-            $('#total').val(total);
-        }
-
-        $(document).on('input', 'input[name="jumlah[]"]', function() {
-            hitungTotal();
-        });
-
-        $(document).on('change', '.barang-dropdown', function() {
-            hitungTotal();
-        });
-    </script> --}}
 
 </x-app-layout>

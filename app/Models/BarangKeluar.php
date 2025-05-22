@@ -33,4 +33,9 @@ class BarangKeluar extends Model
     {
         return $this->hasMany(DetailBarangKeluar::class, 'kd_barang_keluar');
     }
+
+    public function detailbarangkeluar()
+    {
+        return $this->hasMany(DetailBarangKeluar::class, 'kd_barang_keluar');
+    }
 }

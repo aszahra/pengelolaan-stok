@@ -13,7 +13,7 @@ class BarangKeluar extends Model
         'kd_konsumen',
         'kd_barang',
         'tanggal',
-        'keterangan',
+        // 'keterangan',
         'id_user',
     ];
 

@@ -44,7 +44,7 @@ class BarangKeluarController extends Controller
         $barangKeluar = BarangKeluar::create([
             'kd_konsumen' => $request->input('kd_konsumen'),
             'tanggal' => $request->input('tanggal'),
-            'keterangan' => $request->input('keterangan'),
+            // 'keterangan' => $request->input('keterangan'),
             'id_user' => $request->input('id_user')
         ]);
 
@@ -69,8 +69,9 @@ class BarangKeluarController extends Controller
             }
         }
 
-        return redirect()->route('barangmasuk.index')->with('message', 'Data sudah ditambahkan dan stok barang diperbarui');
+        return redirect()->route('barangkeluar.index')->with('message', 'Data sudah ditambahkan dan stok barang diperbarui');
     }
+
 
 
     /**

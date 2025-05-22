@@ -22,7 +22,7 @@
                                     <label for="kd_supplier"
                                         class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Supplier</label>
                                     <select class="js-example-placeholder-single js-states form-control w-full"
-                                        name="kd_supplier" placeholder="Pilih Supplier">
+                                        name="kd_supplier" placeholder="Pilih Supplier" required>
                                         <option value="" disabled selected>Pilih...</option>
                                         @foreach ($supplier as $k)
                                             <option value="{{ $k->id }}">{{ $k->nama_supplier }}</option>

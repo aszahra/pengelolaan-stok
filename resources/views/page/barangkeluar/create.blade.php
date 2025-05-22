@@ -15,6 +15,11 @@
                         </div>
                     </div>
                     <div>
+                        @if ($errors->has('stok'))
+                            <div class="mb-4 p-4 bg-red-100 text-red-800 rounded-lg">
+                                {{ $errors->first('stok') }}
+                            </div>
+                        @endif
                         <form class="w-full mx-auto" method="POST" action="{{ route('barangkeluar.store') }}">
                             @csrf
                             <div class="flex gap-5">
@@ -22,7 +27,7 @@
                                     <label for="kd_konsumen"
                                         class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Supplier</label>
                                     <select class="js-example-placeholder-single js-states form-control w-full"
-                                        name="kd_konsumen" placeholder="Pilih Konsumen">
+                                        name="kd_konsumen" placeholder="Pilih Konsumen" required>
                                         <option value="" disabled selected>Pilih...</option>
                                         @foreach ($konsumen as $k)
                                             <option value="{{ $k->id }}">{{ $k->nama_konsumen }}</option>
@@ -70,9 +75,9 @@
     <script>
         let rowCount = 0;
 
-        const barangList = @json($barang->toArray() ?? []); 
+        const barangList = @json($barang->toArray() ?? []);
 
-        console.log("Data barang:", barangList); 
+        console.log("Data barang:", barangList);
 
         function addRow() {
             rowCount++;
@@ -90,7 +95,7 @@
                     </div>
                     <div class="mb-5 w-full">
                         <label class="block text-sm font-medium">Jumlah</label>
-                        <input type="number" name="jumlah[]" class="w-full p-2 rounded border" required min="1" />
+                        <input type="number" name="jumlah[]" class="w-full p-2 rounded border" required min="1" required/>
                     </div>
                     <div class="mb-5 w-full">
                         <label class="block text-sm font-medium">Satuan</label>

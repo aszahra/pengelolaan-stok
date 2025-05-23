@@ -52,7 +52,7 @@ class UserController extends Controller
             ]);
             // dd($user);
             $user->save();
-            return redirect()->route('page.user.index')
+            return redirect()->route('user.index')
             ->with('success', 'User '.$user->name.' has been added successfully!');
         } catch (\Throwable $th) {
             return back()->with('error', $th->getMessage());

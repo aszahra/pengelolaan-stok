@@ -71,7 +71,6 @@ class LaporanController extends Controller
                 })
                 ->sum('jumlah');
 
-            // Hitung barang keluar di periode [$dari, $sampai]
             $keluar = DetailBarangKeluar::where('kd_barang', $barang->id)
                 ->when($dari, function ($query, $dari) {
                     $query->whereHas('barangKeluar', function ($q) use ($dari) {
